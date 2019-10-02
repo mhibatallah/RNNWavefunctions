@@ -1,0 +1,33 @@
+2019-09-27 02:09:27.442854: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1432] Found device 0 with properties: 
+name: Tesla P100-PCIE-12GB major: 6 minor: 0 memoryClockRate(GHz): 1.3285
+pciBusID: 0000:04:00.0
+totalMemory: 11.91GiB freeMemory: 11.66GiB
+2019-09-27 02:09:27.444678: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1511] Adding visible gpu devices: 0
+2019-09-27 02:09:27.451484: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1432] Found device 0 with properties: 
+name: Tesla P100-PCIE-12GB major: 6 minor: 0 memoryClockRate(GHz): 1.3285
+pciBusID: 0000:83:00.0
+totalMemory: 11.91GiB freeMemory: 11.66GiB
+2019-09-27 02:09:27.465755: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1432] Found device 0 with properties: 
+name: Tesla P100-PCIE-12GB major: 6 minor: 0 memoryClockRate(GHz): 1.3285
+pciBusID: 0000:83:00.0
+totalMemory: 11.91GiB freeMemory: 11.66GiB
+2019-09-27 02:09:27.479014: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1511] Adding visible gpu devices: 0
+2019-09-27 02:09:27.497944: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1511] Adding visible gpu devices: 0
+2019-09-27 02:09:29.525336: I tensorflow/core/common_runtime/gpu/gpu_device.cc:982] Device interconnect StreamExecutor with strength 1 edge matrix:
+2019-09-27 02:09:29.527266: I tensorflow/core/common_runtime/gpu/gpu_device.cc:988]      0 
+2019-09-27 02:09:29.527316: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1001] 0:   N 
+2019-09-27 02:09:29.528669: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1115] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 11277 MB memory) -> physical GPU (device: 0, name: Tesla P100-PCIE-12GB, pci bus id: 0000:83:00.0, compute capability: 6.0)
+2019-09-27 02:09:29.535820: I tensorflow/core/common_runtime/process_util.cc:69] Creating new thread pool with default inter op setting: 2. Tune using inter_op_parallelism_threads for best performance.
+2019-09-27 02:09:29.582663: I tensorflow/core/common_runtime/gpu/gpu_device.cc:982] Device interconnect StreamExecutor with strength 1 edge matrix:
+2019-09-27 02:09:29.584422: I tensorflow/core/common_runtime/gpu/gpu_device.cc:988]      0 
+2019-09-27 02:09:29.584473: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1001] 0:   N 
+2019-09-27 02:09:29.587283: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1115] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 11277 MB memory) -> physical GPU (device: 0, name: Tesla P100-PCIE-12GB, pci bus id: 0000:04:00.0, compute capability: 6.0)
+2019-09-27 02:09:29.592886: I tensorflow/core/common_runtime/process_util.cc:69] Creating new thread pool with default inter op setting: 2. Tune using inter_op_parallelism_threads for best performance.
+2019-09-27 02:09:29.609029: I tensorflow/core/common_runtime/gpu/gpu_device.cc:982] Device interconnect StreamExecutor with strength 1 edge matrix:
+2019-09-27 02:09:29.610680: I tensorflow/core/common_runtime/gpu/gpu_device.cc:988]      0 
+2019-09-27 02:09:29.610730: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1001] 0:   N 
+2019-09-27 02:09:29.612935: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1115] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 11277 MB memory) -> physical GPU (device: 0, name: Tesla P100-PCIE-12GB, pci bus id: 0000:83:00.0, compute capability: 6.0)
+2019-09-27 02:09:29.616461: I tensorflow/core/common_runtime/process_util.cc:69] Creating new thread pool with default inter op setting: 2. Tune using inter_op_parallelism_threads for best performance.
+slurmstepd: error: *** JOB 28006941 ON cdr107 CANCELLED AT 2019-09-27T07:21:12 ***
+slurmstepd: error: *** JOB 27973050 ON cdr116 CANCELLED AT 2019-09-27T07:21:12 ***
+slurmstepd: error: *** JOB 28006940 ON cdr104 CANCELLED AT 2019-09-27T07:21:12 ***
