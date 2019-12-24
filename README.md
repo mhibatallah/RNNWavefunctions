@@ -1,1 +1,1 @@
-# RNNWavefunctions
+# RNN Wavefunctions
