@@ -4,7 +4,7 @@ import os
 import time
 import random
 
-from RNN_2D_GRU import RNNwavefunction
+from RNN_cell import RNNwavefunction
 
 
 # Loading Functions --------------------------
