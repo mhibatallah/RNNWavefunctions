@@ -4,7 +4,7 @@ RNN Wavefunctions are efficient quantum many-body wavefunction ansätzes based o
 
 Our implementation is based on TensorFlow 1 and we plan to support TensorFlow 2 and Pytorch in the future.
 
-## Running Variational Monte Carlo Calculations
+## Running Variational Monte Carlo (VMC) Calculations
 
 Currently, this repository contains four folders, each one is specific for a given model and architecuture in the following order:
 - 1DTFIM: 1D pRNN wavefunction for 1D Transverse-field Ising Model (TFIM).
@@ -13,3 +13,5 @@ Currently, this repository contains four folders, each one is specific for a giv
 - J1J2: 1D cRNN wavefunction for 1D J1-J2 Model.
 
 We also plan to support more models and architectures in the future.
+
+To run a VMC calculation of ground state energies
