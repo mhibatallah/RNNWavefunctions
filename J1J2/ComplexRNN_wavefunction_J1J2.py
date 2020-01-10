@@ -276,16 +276,14 @@ def run_J1J2(numsteps = 10**5, systemsize = 20, J1_  = 1.0, J2_ = 0.0, num_units
               if it%1==0:
                   print('mean(E): {0} \pm {1}, #samples {2}, #Step {3} \n\n'.format(meanE,varE,numsamples, it))
 
-              lr_ = 1/((1/lr)+(it/10)) #learning rate decay
-
-              sess.run(optstep,feed_dict={Eloc:local_energies,samp:samples,learningrate_placeholder: lr_})
-
               if it%50==0:
                  np.save('../Check_Points/J1J2/meanEnergy_N'+str(N)+'_samp'+str(numsamples)+'_lradap'+str(lr)+'_complexGRURNN'+ savename + ending +'_zeromag.npy',meanEnergy)
                  np.save('../Check_Points/J1J2/varEnergy_N'+str(N)+'_samp'+str(numsamples)+'_lradap'+str(lr)+'_complexGRURNN'+ savename + ending +'_zeromag.npy',varEnergy)
 
-              if it>=100 and it%50==0 and varE <= np.min(varEnergy[::50]):
-                 #Saving the model
-                 saver.save(sess,path+filename)
-
+              if it>=5000 and varE <= np.min(varEnergy):
+                 #Saving the performances if the model is better
+                 saver.save(sess,path+'/'+filename)
+                
+              lr_ = 1/((1/lr)+(it/10)) #learning rate decay
+              sess.run(optstep,feed_dict={Eloc:local_energies,samp:samples,learningrate_placeholder: lr_})
     #----------------------------------------
