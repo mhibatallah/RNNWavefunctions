@@ -14,7 +14,7 @@ Currently, this repository contains four folders, each one is specific for a giv
 
 We also plan to support more models and architectures in the future.
 
-To run a VMC calculation of ground state energies, it is enough to specify the following parameters in the python run file in each folder:
+To run a VMC calculation to the find the ground state energy of a certain model, it is enough to specify the following parameters in the python run file in each folder:
 
 - numsteps: Number of Training Iterations.
 - systemsize or systemsize_x/y: system dimensions.
