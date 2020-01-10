@@ -16,7 +16,7 @@ We also plan to support more models and architectures in the future.
 
 To run a VMC calculation to the find the ground state energy of a certain model, it is enough to specify the following parameters in the python run file in each folder:
 
-- numsteps: Number of Training Iterations.
+- numsteps: Number of training iterations.
 - systemsize or systemsize_x/y: system dimensions.
 - parameters of the Hamiltonian.
 - num_units: Number of memory units of the RNN cell.
