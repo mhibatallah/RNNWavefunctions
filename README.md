@@ -14,4 +14,13 @@ Currently, this repository contains four folders, each one is specific for a giv
 
 We also plan to support more models and architectures in the future.
 
-To run a VMC calculation of ground state energies
+To run a VMC calculation of ground state energies, it is enough to specify the following parameters in the python run file in each folder:
+
+- numsteps: Number of Training Iterations.
+- systemsize or systemsize_x/y: system dimensions.
+- parameters of the Hamiltonian.
+- num_units: Number of memory of an RNN cell.
+- num_layers: Number of layers of the RNN cell.
+- num_samples: Number of samples (Batch size) used for training.
+- Seed: to get reproducible results.
+
