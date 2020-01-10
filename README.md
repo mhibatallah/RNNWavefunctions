@@ -19,7 +19,7 @@ To run a VMC calculation of ground state energies, it is enough to specify the f
 - numsteps: Number of Training Iterations.
 - systemsize or systemsize_x/y: system dimensions.
 - parameters of the Hamiltonian.
-- num_units: Number of memory of an RNN cell.
+- num_units: Number of memory units of the RNN cell.
 - num_layers: Number of layers of the RNN cell.
 - num_samples: Number of samples (Batch size) used for training.
 - Seed: to get reproducible results.
