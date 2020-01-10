@@ -11,3 +11,5 @@ Currently, this repository contains four folders, each one is specific for a giv
 - 2DTFIM_1DRNN: 1D pRNN wavefunction for 2D TFIM.
 - 2DTFIM_2DRNN: 2D pRNN wavefunction for 2D TFIM.
 - J1J2: 1D cRNN wavefunction for 1D J1-J2 Model.
+
+We also plan to support more models and architectures in the future.
