@@ -9,7 +9,7 @@ from RNN_GRU import RNNwavefunction
 
 # Loading Functions --------------------------
 def Ising2D_local_energies(Jz, Bx, Nx, Ny, samples, queue_samples, log_probs_tensor, samples_placeholder, log_probs, sess):
-    """ To get the local energies of 1D TFIM (OBC) given a set of set of samples in parallel!"""
+    """ To get the local energies of 2D TFIM (OBC) given a set of set of samples in parallel!"""
     numsamples = samples.shape[0]
     samples_reshaped = np.reshape(samples, [numsamples, Nx, Ny])
 
@@ -90,6 +90,7 @@ def run_2DTFIM(numsteps = 2*10**4, systemsize_x = 5, systemsize_y = 5, Bx = +2, 
 
     #now initialize everything --------------------
     with wf.graph.as_default():
+        #We map a 2D configuration into a 1D configuration
         samples_placeholder=tf.placeholder(dtype=tf.int32,shape=[numsamples,Nx*Ny]) #the samples_placeholder are the samples of all of the spins
         global_step = tf.Variable(0, trainable=False)
         learningrate_placeholder=tf.placeholder(dtype=tf.float64,shape=[])
@@ -118,8 +119,7 @@ def run_2DTFIM(numsteps = 2*10**4, systemsize_x = 5, systemsize_y = 5, Bx = +2, 
     print('Training with numsamples = ', numsamples)
     print('\n')
 
-    Jz = +np.ones((Nx,Ny))
-    # Bx = +2
+    Jz = +np.ones((Nx,Ny)) #Ferromagnetic couplings
 
     lr=np.float64(learningrate)
 
