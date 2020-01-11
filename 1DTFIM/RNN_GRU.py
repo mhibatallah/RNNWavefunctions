@@ -56,7 +56,7 @@ class RNNwavefunction(object):
 
     def log_probability(self,samples,inputdim):
         """
-        This class method outputs the log_probs of the given samples such that the spins can take values in 0,1,...,inputdim-1
+        This class method outputs the log_probs of the given samples such that the spins can values in 0,1,...,inputdim-1
         """
         with self.graph.as_default():
 
