@@ -41,6 +41,7 @@ class RNNwavefunction(object):
                 self.numsamples=inputs.shape[0]
 
                 rnn_state=self.rnn.zero_state(self.numsamples,dtype=tf.float32)
+                #zero state returns a zero filled tensor withs shape = (self.numsamples, num_units)
 
                 for n in range(self.N):
                     rnn_output, rnn_state = self.rnn(inputs, rnn_state)
