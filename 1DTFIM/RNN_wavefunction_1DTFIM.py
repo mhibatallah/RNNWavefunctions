@@ -143,8 +143,8 @@ def run_1DTFIM(numsteps = 10**4, systemsize = 20, num_units = 50, num_layers = 1
             log_probs_=wf.log_probability(samp,inputdim=2)
 
             #now calculate the fake cost function to enjoy the properties of automatic differentiation
-            cost = tf.reduce_mean(tf.multiply(log_probs_,Eloc)) - tf.reduce_mean(Eloc)*tf.reduce_mean(log_probs_) #factor of 2 in the above equation
-
+            cost = tf.reduce_mean(tf.multiply(log_probs_,Eloc)) - tf.reduce_mean(Eloc)*tf.reduce_mean(log_probs_) 
+            
             #Calculate Gradients---------------
 
             gradients, variables = zip(*optimizer.compute_gradients(cost))
