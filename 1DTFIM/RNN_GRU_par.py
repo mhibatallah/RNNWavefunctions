@@ -1,10 +1,12 @@
+#This is an implementation of the pRNN wavefunction with a parity symmetry
+
 import tensorflow as tf
 import numpy as np
 import random
 
 class RNNwavefunction(object):
     def __init__(self,systemsize,cell=tf.contrib.rnn.LSTMCell,activation=tf.nn.relu,units=[10],scope='RNNwavefunction', seed = 111):
-
+    
         self.graph=tf.Graph()
         self.scope=scope #Label of the RNN wavefunction
         self.N=systemsize #Number of sites of the 1D chain
@@ -16,11 +18,14 @@ class RNNwavefunction(object):
         with self.graph.as_default():
             with tf.variable_scope(self.scope,reuse=tf.AUTO_REUSE):
                 tf.set_random_seed(seed)  # tensorflow pseudo-random generator
-                self.rnn=tf.nn.rnn_cell.MultiRNNCell([cell(units[n]) for n in range(len(units))])
-                self.dense = tf.layers.Dense(2,activation=tf.nn.softmax,name='wf_dense')
+                #Define the RNN cell where units[n] corresponds to the number of memory units in each layer n
+                self.rnn=tf.nn.rnn_cell.MultiRNNCell([cell(units[n]) for n in range(len(units))]) 
+                self.dense = tf.layers.Dense(2,activation=tf.nn.softmax,name='wf_dense') #Define the Fully-Connected layer followed by a Softmax
 
     def sample(self,numsamples,inputdim):
-
+        """
+        This class method outputs "numsamples" samples generated such that spin can take values in 0,1,...,inputdim-1
+        """
         with self.graph.as_default(): #Call the default graph, used if willing to create multiple graphs.
             samples = []
             with tf.variable_scope(self.scope,reuse=tf.AUTO_REUSE):
@@ -49,7 +54,10 @@ class RNNwavefunction(object):
         return self.samples
 
     def log_probability(self,samples,inputdim):
-
+        """
+        This class method outputs the log_probs of the given samples such that the spins can take values in 0,1,...,inputdim-1
+        We also impose the parity symmetry
+        """
         with self.graph.as_default():
 
             self.inputdim=inputdim
@@ -70,15 +78,14 @@ class RNNwavefunction(object):
                     rnn_output, rnn_state = self.rnn(inputs, rnn_state)
                     output=self.dense(rnn_output)
                     probs.append(output)
-                    if n<self.N-1:
-                        inputs=tf.reshape(tf.one_hot(tf.reshape(tf.slice(samples,begin=[np.int32(0),np.int32(n)],size=[np.int32(-1),np.int32(1)]),shape=[self.numsamples]),depth=self.outputdim,dtype = tf.float32),shape=[self.numsamples,self.inputdim])
+                    inputs=tf.reshape(tf.one_hot(tf.reshape(tf.slice(samples,begin=[np.int32(0),np.int32(n)],size=[np.int32(-1),np.int32(1)]),shape=[self.numsamples]),depth=self.outputdim,dtype = tf.float32),shape=[self.numsamples,self.inputdim])
 
             probs=tf.cast(tf.transpose(tf.stack(values=probs,axis=2),perm=[0,2,1]),tf.float64)
             one_hot_samples=tf.one_hot(samples,depth=self.inputdim, dtype = tf.float64)
 
             log_probs1=tf.reduce_sum(tf.log(tf.reduce_sum(tf.multiply(probs,one_hot_samples),axis=2)),axis=1)
 
-            #Reverse all the spin conf-----------------------------------------------------------------------------------------------------------------
+            #Reverse all the spin configurations to impose the parity symmetry---------------------------
             samples_rev = samples[:,::-1]
 
             inputs=tf.stack([a,b], axis = 1)
@@ -92,12 +99,11 @@ class RNNwavefunction(object):
                     rnn_output, rnn_state = self.rnn(inputs, rnn_state)
                     output=self.dense(rnn_output)
                     probs.append(output)
-                    if n<self.N-1:
-                        inputs=tf.reshape(tf.one_hot(tf.reshape(tf.slice(samples_rev,begin=[np.int32(0),np.int32(n)],size=[np.int32(-1),np.int32(1)]),shape=[self.numsamples]),depth=self.outputdim,dtype = tf.float32),shape=[self.numsamples,self.inputdim])
+                    inputs=tf.reshape(tf.one_hot(tf.reshape(tf.slice(samples_rev,begin=[np.int32(0),np.int32(n)],size=[np.int32(-1),np.int32(1)]),shape=[self.numsamples]),depth=self.outputdim,dtype = tf.float32),shape=[self.numsamples,self.inputdim])
 
             probs=tf.cast(tf.transpose(tf.stack(values=probs,axis=2),perm=[0,2,1]),tf.float64)
             one_hot_samples=tf.one_hot(samples_rev,depth=self.inputdim, dtype = tf.float64)
 
             log_probs2 = tf.reduce_sum(tf.log(tf.reduce_sum(tf.multiply(probs,one_hot_samples),axis=2)),axis=1)
 
-            return tf.log(0.5*(tf.exp(log_probs1)+tf.exp(log_probs2)))
+            return tf.log(0.5*(tf.exp(log_probs1)+tf.exp(log_probs2))) #We take the average of P1 and P2 to impose the parity symmetry
