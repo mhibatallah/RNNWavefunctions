@@ -209,11 +209,12 @@ def run_1DTFIM(numsteps = 10**4, systemsize = 20, num_units = 50, num_layers = 1
               if it%1==0:
                   print('mean(E): {0} \pm {1}, #samples {2}, #Step {3} \n\n'.format(meanE,varE,numsamples, it))
 
-              sess.run(optstep,feed_dict={Eloc:local_energies,samp:samples,learningrate_placeholder: lr})
-
-              if it%50==0 and varE <= np.min(varEnergy[::50]):
+              if it>=100 and varE <= np.min(varEnergy): #We do it>100 to start saving the model after we get close to convergence
                   #Saving the performances if the model is better
                   saver.save(sess,path+'/'+filename)
+                
+              sess.run(optstep,feed_dict={Eloc:local_energies,samp:samples,learningrate_placeholder: lr})
+
 
               if it%100==0:
                   #Saving the performances
