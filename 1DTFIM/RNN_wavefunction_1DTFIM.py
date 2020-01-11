@@ -62,7 +62,7 @@ def Ising_local_energies(Jz, Bx, samples, queue_samples, log_probs_tensor, sampl
 #--------------------------
 
 # ---------------- Running VMC with RNNs -------------------------------------
-def run_1DTFIM(numsteps = 10**4, systemsize = 20, num_units = 50, Bx = 1, num_layers = 1, num_samples = 500, learningrate = 5e-3, seed = 111):
+def run_1DTFIM(numsteps = 10**4, systemsize = 20, num_units = 50, Bx = 1, num_layers = 1, numsamples = 500, learningrate = 5e-3, seed = 111):
 
     #Seeding ---------------------------------------------
     tf.reset_default_graph()
@@ -121,9 +121,6 @@ def run_1DTFIM(numsteps = 10**4, systemsize = 20, num_units = 50, Bx = 1, num_la
     path=os.getcwd()
 
     Jz = +np.ones(N) #Ferromagnetic coupling
-    
-    #for a given network, generate a large number of samples:
-    numsamples = num_samples
 
     #Learning rate
     lr=np.float64(learningrate)
@@ -132,7 +129,7 @@ def run_1DTFIM(numsteps = 10**4, systemsize = 20, num_units = 50, Bx = 1, num_la
     for u in units:
         ending+='_{0}'.format(u)
 
-    filename='/../Check_Points/TIM/GRU/RNNwavefunction_N'+str(N)+'_samp'+str(numsamples)+'_Jz1Bx1_GRURNN_OBC'+ending + '.ckpt'
+    filename='/../Check_Points/TIM/GRU/RNNwavefunction_N'+str(N)+'_samp'+str(numsamples)+'_Jz1Bx'+str(Bx)+'_GRURNN_OBC'+ending + '.ckpt'
     savename = '_TIM'
 
     with tf.variable_scope(wf.scope,reuse=tf.AUTO_REUSE):
