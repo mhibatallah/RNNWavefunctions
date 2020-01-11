@@ -68,7 +68,7 @@ def Ising2D_local_energies(Jz, Bx, Nx, Ny, samples, queue_samples, log_probs_ten
 #--------------------------
 
 # ---------------- Running VMC with RNNs -------------------------------------
-def run_2DTFIM(numsteps = 2*10**4, systemsize_x = 5, systemsize_y = 5, Bx = +2, num_units = 50, num_layers = 1, num_samples = 500, learningrate = 1e-3, seed = 333):
+def run_2DTFIM(numsteps = 2*10**4, systemsize_x = 5, systemsize_y = 5, Bx = +2, num_units = 50, num_layers = 1, numsamples = 500, learningrate = 1e-3, seed = 333):
 
     #Seeding
     tf.reset_default_graph()
@@ -110,10 +110,8 @@ def run_2DTFIM(numsteps = 2*10**4, systemsize_x = 5, systemsize_y = 5, Bx = +2, 
     #---------------------------
 
 
-    #Running the training -------------------
-    numsamples = num_samples
-
-
+    #Building the graph -------------------
+    
     path=os.getcwd()
 
     print('Training with numsamples = ', numsamples)
@@ -133,13 +131,15 @@ def run_2DTFIM(numsteps = 2*10**4, systemsize_x = 5, systemsize_y = 5, Bx = +2, 
         with wf.graph.as_default():
             Eloc=tf.placeholder(dtype=tf.float64,shape=[numsamples])
             samp=tf.placeholder(dtype=tf.int32,shape=[numsamples,Nx*Ny])
-    #         basis_ = tf.placeholder(dtype=tf.int32,shape=[2**N,N])
             log_probs_=wf.log_probability(samp,inputdim=2)
+           
+            #now calculate the fake cost function to enjoy the properties of automatic differentiation
+            cost = tf.reduce_mean(tf.multiply(log_probs_,tf.stop_gradient(Eloc))) - tf.reduce_mean(tf.stop_gradient(Eloc))*tf.reduce_mean(log_probs_)
 
-            cost = tf.reduce_mean(tf.multiply(log_probs_,tf.stop_gradient(Eloc))) - tf.reduce_mean(tf.stop_gradient(Eloc))*tf.reduce_mean(log_probs_) #factor of 2 in the above equation
-
+            #Calculate Gradients---------------
             gradients, variables = zip(*optimizer.compute_gradients(cost))
-            #clipped_gradients,_=tf.clip_by_global_norm(gradients,1.0)
+            #End calculate Gradients---------------
+            
             optstep=optimizer.apply_gradients(zip(gradients,variables),global_step=global_step)
             sess.run(tf.variables_initializer(optimizer.variables()),feed_dict={learning_rate_withexpdecay: lr})
 
@@ -150,7 +150,7 @@ def run_2DTFIM(numsteps = 2*10**4, systemsize_x = 5, systemsize_y = 5, Bx = +2, 
     meanEnergy=[]
     varEnergy=[]
 
-    #Loading previous trainings----------
+    #Loading previous trainings (uncomment if you wanna restore a previous session)----------
     # print("Loading the model")
     # path=os.getcwd()
     # ending='units'
@@ -200,16 +200,16 @@ def run_2DTFIM(numsteps = 2*10**4, systemsize_x = 5, systemsize_y = 5, Bx = +2, 
 
                 print('mean(E): {0} \pm {1}, #samples {2}, #Step {3} \n\n'.format(meanE,varE,numsamples, it))
 
-                #lr decay
-                lr_ = 1/((1/lr)+(it/10))
-
-                sess.run(optstep,feed_dict={Eloc:local_energies,samp:samples,learningrate_placeholder: lr_})
-
-                if it%500==0 and varE <= np.min(varEnergy):
-                  #Saving the performances if the model is better
-                  saver.save(sess,path+'/'+filename)
+                if it>=1000 and varE <= np.min(varEnergy): #We do it>1000 to start saving the model after we get close to convergence
+                    #Saving the performances if the model is better
+                    saver.save(sess,path+'/'+filename)
 
                 if it%100==0:
                   #Saving the performances
                   np.save('../Check_Points/2DTIM/GRU/meanEnergy_GRURNN_'+str(Nx)+'x'+ str(Ny) +'_Bx'+str(Bx)+'_lradap'+str(lr)+'_samp'+str(numsamples)+ending  + savename +'.npy', meanEnergy)
                   np.save('../Check_Points/2DTIM/GRU/varEnergy_GRURNN_'+str(Nx)+'x'+ str(Ny) +'_Bx'+str(Bx)+'_lradap'+str(lr)+'_samp'+str(numsamples)+ending + savename +'.npy', varEnergy)
+
+                #lr decay
+                lr_ = 1/((1/lr)+(it/10))
+                #Optimization step
+                sess.run(optstep,feed_dict={Eloc:local_energies,samp:samples,learningrate_placeholder: lr_})
