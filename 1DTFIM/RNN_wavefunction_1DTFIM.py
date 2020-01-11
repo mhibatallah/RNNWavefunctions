@@ -62,7 +62,7 @@ def Ising_local_energies(Jz, Bx, samples, queue_samples, log_probs_tensor, sampl
 #--------------------------
 
 # ---------------- Running VMC with RNNs -------------------------------------
-def run_1DTFIM(numsteps = 10**4, systemsize = 20, num_units = 50, num_layers = 1, num_samples = 500, learningrate = 5e-3, seed = 111):
+def run_1DTFIM(numsteps = 10**4, systemsize = 20, num_units = 50, Bx = 1, num_layers = 1, num_samples = 500, learningrate = 5e-3, seed = 111):
 
     #Seeding ---------------------------------------------
     tf.reset_default_graph()
@@ -120,9 +120,8 @@ def run_1DTFIM(numsteps = 10**4, systemsize = 20, num_units = 50, num_layers = 1
 
     path=os.getcwd()
 
-    Jz = +np.ones(N) #Ferro coupling
-    Bx = +1 #Critical Point
-
+    Jz = +np.ones(N) #Ferromagnetic coupling
+    
     #for a given network, generate a large number of samples:
     numsamples = num_samples
 
