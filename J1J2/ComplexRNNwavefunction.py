@@ -14,7 +14,14 @@ def heavyside(inputs):
 
 class RNNwavefunction(object):
     def __init__(self,systemsize,cell=None,units=[10,10],scope='RNNwavefunction', seed=111):
-
+        """
+            systemsize:  int, size of the lattice
+            cell:        a tensorflow RNN cell
+            units:       list of int
+                         number of units per RNN layer
+            scope:       str
+                         the name of the name-space scope
+        """
         self.graph=tf.Graph()
         self.scope=scope #Label of the RNN wavefunction
         self.N=systemsize #Number of sites of the 1D chain
