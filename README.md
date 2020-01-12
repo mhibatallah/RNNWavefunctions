@@ -14,6 +14,6 @@ Currently, this repository contains four folders, each one is specific for a giv
 
 We also plan to support more models and architectures in the future.
 
-To run a VMC calculation for the task of finding the ground state energy of a certain model, it is enough to specify the following parameters in the python run file in a the folder of interest.
+To run a VMC calculation for the task of finding the ground state energy of a certain model, it is enough to specify the following parameters in the python run file in a folder of interest.
 
 For further questions or inquiries, please feel free to send an email to mohamed.hibat.allah@uwaterloo.ca, we would also appreciate future contributions.
