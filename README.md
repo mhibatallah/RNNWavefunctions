@@ -24,3 +24,4 @@ To run a VMC calculation for the task of finding the ground state energy of a ce
 - num_samples: Number of samples (Batch size) used for training.
 - Seed: to get reproducible results.
 
+For further questions or inquiries, please email mohamed.hibat.allah@uwaterloo.ca
