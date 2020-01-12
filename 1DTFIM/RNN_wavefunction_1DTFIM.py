@@ -9,7 +9,18 @@ from RNN_GRU import RNNwavefunction
 
 # Loading Functions --------------------------
 def Ising_local_energies(Jz, Bx, samples, queue_samples, log_probs_tensor, samples_placeholder, log_probs, sess):
-    """ To get the local energies of 1D TFIM (OBC) given a set of set of samples in parallel!"""
+    """ To get the local energies of 1D TFIM (OBC) given a set of set of samples in parallel!
+    Returns: The local energies that correspond to the "samples"
+    Inputs:
+    - samples: (numsamples, N) 
+    - Jz: (N)
+    - Bx: (N)
+    - queue_samples: ((N+1)*numsamples, N) an empty allocated np array to store the non diagonal elements
+    - log_probs_tensor: A TF tensor with size (numsamples)
+    - samples_placeholder: A TF placeholder to feed in a set of configurations
+    - log_probs: ((N+1)*numsamples) an empty allocated np array to store the log_probs non diagonal elements
+    - sess: The current TF session
+    """
     numsamples = samples.shape[0]
     N = samples.shape[1]
 
