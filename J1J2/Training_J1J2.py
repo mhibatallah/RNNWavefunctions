@@ -252,7 +252,7 @@ def run_J1J2(numsteps = 10**5, systemsize = 20, J1_  = 1.0, J2_ = 0.0, num_units
               #Process in steps to get log amplitudes
               # print("Generating log amplitudes Started")
               start = time.time()
-              steps = len_sigmas//30000+1
+              steps = len_sigmas//30000+1 #Process the sigmas in steps to avoid allocating too much memory
 
               # print("number of required steps :" + str(steps))
 
