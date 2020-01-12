@@ -13,8 +13,8 @@ def Ising_local_energies(Jz, Bx, samples, queue_samples, log_probs_tensor, sampl
     Returns: The local energies that correspond to the "samples"
     Inputs:
     - samples: (numsamples, N) 
-    - Jz: (N)
-    - Bx: (N)
+    - Jz: (N) np array
+    - Bx: float
     - queue_samples: ((N+1)*numsamples, N) an empty allocated np array to store the non diagonal elements
     - log_probs_tensor: A TF tensor with size (numsamples)
     - samples_placeholder: A TF placeholder to feed in a set of configurations
