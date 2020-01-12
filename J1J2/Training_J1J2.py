@@ -6,9 +6,8 @@ import random
 
 from ComplexRNNwavefunction import RNNwavefunction
 
-#Loading functions:
 # Loading Functions --------------------------
-def J1J2MatrixElements(J1,J2,Bz,sigmap, sigmas, matrixelements, periodic = False, Marshall_sign = False):
+def J1J2MatrixElements(J1,J2,Bz,sigmap, sigmaH, matrixelements, periodic = False, Marshall_sign = False):
     """
     computes the matrix element of the J1J2 model for a given state sigmap
     -----------------------------------------------------------------------------------
@@ -18,8 +17,12 @@ def J1J2MatrixElements(J1,J2,Bz,sigmap, sigmas, matrixelements, periodic = False
     sigmap:     np.ndarrray of dtype=int and shape (N)
                 spin-state, integer encoded (using 0 for down spin and 1 for up spin)
                 A sample of spins can be fed here.
+    sigmaH: an array to store the diagonal and the diagonal configurations after applying the Hamiltonian on sigmap.
+    matrixelements: an array where to store the matrix elements.
+    periodic: bool, indicate if the chain is periodic on not.
+    Marshall_sign: bool, indicate if the Marshall sign is applied or not.
     -----------------------------------------------------------------------------------
-    Returns: ...
+    Returns: num, float which indicate the number of diagonal and non-diagonal configurations after applying the Hamiltonian on sigmap
     """
     N=len(Bz)
     #the diagonal part is simply the sum of all Sz-Sz interactions plus a B field
@@ -47,7 +50,7 @@ def J1J2MatrixElements(J1,J2,Bz,sigmap, sigmas, matrixelements, periodic = False
 
     sig = np.copy(sigmap)
 
-    sigmas[num] = sig
+    sigmaH[num] = sig
 
     num += 1
 
@@ -59,7 +62,7 @@ def J1J2MatrixElements(J1,J2,Bz,sigmap, sigmas, matrixelements, periodic = False
               sig[site]=sig[(site+1)%N] #Make the two neighbouring spins equal.
               sig[(site+1)%N]=sigmap[site]
 
-              sigmas[num] = sig #The last fours lines are meant to flip the two neighbouring spins (that the effect of applying J+ and J-)
+              sigmaH[num] = sig #The last fours lines are meant to flip the two neighbouring spins (that the effect of applying J+ and J-)
 
               if Marshall_sign:
                   matrixelements[num] = -J1[site]/2
@@ -75,7 +78,7 @@ def J1J2MatrixElements(J1,J2,Bz,sigmap, sigmas, matrixelements, periodic = False
             sig[site]=sig[(site+2)%N] #Make the two neighbouring spins equal.
             sig[(site+2)%N]=sigmap[site]
 
-            sigmas[num] = sig #The last fours lines are meant to flip the two neighbouring spins (that the effect of applying J+ and J-)
+            sigmaH[num] = sig #The last fours lines are meant to flip the two neighbouring spins (that the effect of applying J+ and J-)
             matrixelements[num] = +J2[site]/2
 
             num += 1
@@ -83,8 +86,7 @@ def J1J2MatrixElements(J1,J2,Bz,sigmap, sigmas, matrixelements, periodic = False
 
 def J1J2Slices(J1, J2, Bz, sigmasp, sigmas, H, sigmaH, matrixelements):
     """
-    computes the local energies for the open J1J2 model for a given spin-state sample sigmasp:
-    Eloc(\sigma')=\sum_{sigma} H_{\sigma'\sigma}\psi_{\sigma}/\psi_{\sigma'}
+    Returns the list of slices (that will help to slice the array sigmas)
     ----------------------------------------------------------------------------
     Parameters:
     Jz, Jxy, Bz, Bx: np.ndarray of shape (N), (N) and (N), respectively, and dtype=float:
