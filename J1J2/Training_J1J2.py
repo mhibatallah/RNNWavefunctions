@@ -10,6 +10,7 @@ from ComplexRNNwavefunction import RNNwavefunction
 def J1J2MatrixElements(J1,J2,Bz,sigmap, sigmaH, matrixelements, periodic = False, Marshall_sign = False):
     """
     computes the matrix element of the J1J2 model for a given state sigmap
+    We hope to make this procedure paralell in future versions!
     -----------------------------------------------------------------------------------
     Parameters:
     J1, J2, Bz: np.ndarray of shape (N), (N) and (N), respectively, and dtype=float:
@@ -18,7 +19,7 @@ def J1J2MatrixElements(J1,J2,Bz,sigmap, sigmaH, matrixelements, periodic = False
                 spin-state, integer encoded (using 0 for down spin and 1 for up spin)
                 A sample of spins can be fed here.
     sigmaH: an array to store the diagonal and the diagonal configurations after applying the Hamiltonian on sigmap.
-    matrixelements: an array where to store the matrix elements.
+    matrixelements: an array where to store the matrix elements after applying the Hamiltonian on sigmap.
     periodic: bool, indicate if the chain is periodic on not.
     Marshall_sign: bool, indicate if the Marshall sign is applied or not.
     -----------------------------------------------------------------------------------
@@ -86,14 +87,18 @@ def J1J2MatrixElements(J1,J2,Bz,sigmap, sigmaH, matrixelements, periodic = False
 
 def J1J2Slices(J1, J2, Bz, sigmasp, sigmas, H, sigmaH, matrixelements):
     """
-    Returns the list of slices (that will help to slice the array sigmas)
+    Returns: A tuple -The list of slices (that will help to slice the array sigmas)
+             -Total number of configurations after applying the Hamiltonian on the list of samples sigmasp (This will be useful later during training, note that it is not constant for J1J2 as opposed to TFIM)
     ----------------------------------------------------------------------------
     Parameters:
-    Jz, Jxy, Bz, Bx: np.ndarray of shape (N), (N) and (N), respectively, and dtype=float:
-                XXZ parameters
+    J1, J2, Bz: np.ndarray of shape (N), (N) and (N), respectively, and dtype=float:
+                J1J2 parameters
     sigmasp:    np.ndarrray of dtype=int and shape (numsamples,N)
                 spin-states, integer encoded (using 0 for down spin and 1 for up spin)
-    RNN:        fully initialized RNNwavefunction object
+    sigmas: an array to store the diagonal and the diagonal configurations after applying the Hamiltonian on all the samples sigmasp.
+    H: an array to store the diagonal and the diagonal matrix elements after applying the Hamiltonian on all the samples sigmasp.
+    sigmaH: an array to store the diagonal and the diagonal configurations after applying the Hamiltonian on a single sample.
+    matrixelements: an array where to store the matrix elements after applying the Hamiltonian on sigmap on a single sample.
     ----------------------------------------------------------------------------
     """
 
