@@ -26,7 +26,20 @@ class RNNwavefunction(object):
 
     def sample(self,numsamples,inputdim):
         """
-        This class method outputs "numsamples" samples generated such that spin can take values in 0,1,...,inputdim-1
+            generate samples from a probability distribution parametrized by a recurrent network
+            ------------------------------------------------------------------------
+            Parameters:
+
+            numsamples:      int
+                             number of samples to be produced
+            inputdim:        int
+                             hilbert space dimension
+
+            ------------------------------------------------------------------------
+            Returns:      
+
+            samples:         tf.Tensor of shape (numsamples,systemsize_x*systemsize_y)
+                             the samples in integer encoding
         """
         with self.graph.as_default(): #Call the default graph, used if willing to create multiple graphs.
             with tf.variable_scope(self.scope,reuse=tf.AUTO_REUSE):
@@ -60,8 +73,19 @@ class RNNwavefunction(object):
 
     def log_probability(self,samples,inputdim):
         """
-        This class method outputs the log_probs of the given samples such that the spins take values in 0,1,...,inputdim-1
-        """
+            calculate the log-probabilities of ```samples``
+            ------------------------------------------------------------------------
+            Parameters:
+            samples:         tf.Tensor
+                             a tf.placeholder of shape (number of samples,systemsize_x*system_size_y)
+                             containing the input samples in integer encoding
+            inputdim:        int
+                             dimension of the input space
+            ------------------------------------------------------------------------
+            Returns:
+            log-probs        tf.Tensor of shape (number of samples,)
+                             the log-probability of each sample
+            """
         
         with self.graph.as_default():
 
