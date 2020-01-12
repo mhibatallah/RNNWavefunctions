@@ -18,8 +18,6 @@ class RNNwavefunction(object):
         self.graph=tf.Graph()
         self.scope=scope #Label of the RNN wavefunction
         self.N=systemsize #Number of sites of the 1D chain
-        self.activation_rnn = activation_rnn
-        self.activation_dense = activation_dense
 
         #Seeding
         random.seed(seed)  # `python` built-in pseudo-random generator
@@ -60,7 +58,7 @@ class RNNwavefunction(object):
                 for n in range(self.N):
                   rnn_output,rnn_state = self.rnn(inputs_ampl, rnn_state)
 
-                  #Applying complex kernels
+                  #Applying softmax layer
                   output_ampl = self.dense_ampl(rnn_output)
 
                   if n>=self.N/2: #Enforcing zero magnetization
@@ -107,8 +105,9 @@ class RNNwavefunction(object):
 
                     rnn_output,rnn_state = self.rnn(inputs_ampl, rnn_state)
 
-                    #Applying complex kernels
+                    #Applying softmax layer
                     output_ampl = self.dense_ampl(rnn_output)
+                    #Applying softsign layer
                     output_phase = self.dense_phase(rnn_output)
 
                     if n>=self.N/2: #Enforcing zero magnetization
