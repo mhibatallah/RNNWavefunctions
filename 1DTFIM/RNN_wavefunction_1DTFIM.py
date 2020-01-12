@@ -26,7 +26,7 @@ def Ising_local_energies(Jz, Bx, samples, queue_samples, log_probs_tensor, sampl
 
     local_energies = np.zeros((numsamples), dtype = np.float64)
 
-    for i in range(N-1): #diagonal elements (let's do 1D for simple stuff)
+    for i in range(N-1): #diagonal elements 
         values = samples[:,i]+samples[:,i+1]
         valuesT = np.copy(values)
         valuesT[values==2] = +1 #If both spins are up
