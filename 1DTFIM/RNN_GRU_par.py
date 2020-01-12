@@ -24,7 +24,20 @@ class RNNwavefunction(object):
 
     def sample(self,numsamples,inputdim):
         """
-        This class method outputs "numsamples" samples generated such that spin can take values in 0,1,...,inputdim-1
+            generate samples from a probability distribution parametrized by a recurrent network
+            ------------------------------------------------------------------------
+            Parameters:
+
+            numsamples:      int
+                             number of samples to be produced
+            inputdim:        int
+                             hilbert space dimension
+
+            ------------------------------------------------------------------------
+            Returns:      
+
+            samples:         tf.Tensor of shape (numsamples,systemsize)
+                             the samples in integer encoding
         """
         with self.graph.as_default(): #Call the default graph, used if willing to create multiple graphs.
             samples = []
@@ -56,8 +69,20 @@ class RNNwavefunction(object):
 
     def log_probability(self,samples,inputdim):
         """
-        This class method outputs the log_probs of the given samples such that the spins can values in 0,1,...,inputdim-1
-        We also impose the parity symmetry
+            calculate the log-probabilities of ```samples``
+            ------------------------------------------------------------------------
+            Parameters:
+
+            samples:         tf.Tensor
+                             a tf.placeholder of shape (number of samples,systemsize)
+                             containing the input samples in integer encoding
+            inputdim:        int
+                             dimension of the input space
+
+            ------------------------------------------------------------------------
+            Returns:
+            log-probs        tf.Tensor of shape (number of samples,)
+                             the log-probability of each sample
         """
         with self.graph.as_default():
 
