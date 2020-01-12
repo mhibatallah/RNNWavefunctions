@@ -9,8 +9,8 @@ from ComplexRNNwavefunction import RNNwavefunction
 # Loading Functions --------------------------
 def J1J2MatrixElements(J1,J2,Bz,sigmap, sigmaH, matrixelements, periodic = False, Marshall_sign = False):
     """
-    computes the matrix element of the J1J2 model for a given state sigmap
-    We hope to make this procedure paralell in future versions!
+    -Computes the matrix element of the J1J2 model for a given configuration sigmap
+    -We hope to make this function parallel in future versions to return the matrix elements of a large number of configurations
     -----------------------------------------------------------------------------------
     Parameters:
     J1, J2, Bz: np.ndarray of shape (N), (N) and (N), respectively, and dtype=float:
