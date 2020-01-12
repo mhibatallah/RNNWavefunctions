@@ -74,7 +74,7 @@ class RNNwavefunction(object):
 
     def log_probability(self,samples,inputdim):
         """
-            calculate the log-probabilities of ```samples`` with a parity symmetry
+            calculate the log-probabilities of ```samples``
             ------------------------------------------------------------------------
             Parameters:
             samples:         tf.Tensor
