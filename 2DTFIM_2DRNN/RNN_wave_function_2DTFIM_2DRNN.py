@@ -4,7 +4,7 @@ import os
 import time
 import random
 
-from MDRNN import RNNwavefunction
+from RNNwavefunction import RNNwavefunction
 from MDRNNcell import MDRNNcell
 
 # Loading Functions --------------------------
