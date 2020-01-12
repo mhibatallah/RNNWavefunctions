@@ -41,9 +41,9 @@ class RNNwavefunction(object):
                              hilbert space dimension
 
             ------------------------------------------------------------------------
-            Returns:         a tuple (samples,log-probs)
+            Returns:      
 
-            samples:         tf.Tensor of shape (numsamples,systemsize)
+            samples:         tf.Tensor of shape (numsamples,systemsize_x, systemsize_y)
                              the samples in integer encoding
         """
 
@@ -118,7 +118,7 @@ class RNNwavefunction(object):
             Parameters:
 
             samples:         tf.Tensor
-                             a tf.placeholder of shape (number of samples,system-size)
+                             a tf.placeholder of shape (number of samples,systemsize_x,system_size_y)
                              containing the input samples in integer encoding
             inputdim:        int
                              dimension of the input space
