@@ -35,10 +35,11 @@ class RNNwavefunction(object):
             with tf.variable_scope(self.scope,reuse=tf.AUTO_REUSE):
               tf.set_random_seed(seed)  # tensorflow pseudo-random generator
 
+              #Define the RNN cell where units[n] corresponds to the number of memory units in each layer n
               self.rnn=tf.nn.rnn_cell.MultiRNNCell([cell(units[n]) for n in range(len(units))])
 
-              self.dense_ampl = tf.layers.Dense(2,activation=sqsoftmax,name='wf_dense_ampl')
-              self.dense_phase = tf.layers.Dense(2,activation=softsign_,name='wf_dense_phase')
+              self.dense_ampl = tf.layers.Dense(2,activation=sqsoftmax,name='wf_dense_ampl') #Define the Fully-Connected layer followed by a square root of Softmax
+              self.dense_phase = tf.layers.Dense(2,activation=softsign_,name='wf_dense_phase') #Define the Fully-Connected layer followed by a Softsign*pi
 
     def sample(self,numsamples,inputdim):
         """
@@ -70,8 +71,7 @@ class RNNwavefunction(object):
 
                 samples=[]
 
-                rnn_state = self.rnn.zero_state(self.numsamples,dtype=tf.float32)
-
+                rnn_state = self.rnn.zero_state(self.numsamples,dtype=tf.float32) #Define the initial hidden state of the RNN
 
                 inputs_ampl = inputs
 
