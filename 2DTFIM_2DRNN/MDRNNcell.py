@@ -3,9 +3,8 @@ import tensorflow as tf
 
 ###################################################################################################333
 
-# 4k / 7k trainable params
 class MDRNNcell(tf.contrib.rnn.RNNCell):
-    """The most basic 2DRNN cell.
+    """An implementation of the most basic 2DRNN Vanilla RNN cell.
     Args:
         num_units (int): The number of units in the RNN cell, hidden layer size.
         num_in: Input vector size, input layer size.
@@ -13,8 +12,7 @@ class MDRNNcell(tf.contrib.rnn.RNNCell):
 
     def __init__(self, num_units = None, num_in = None, name=None, dtype = None, reuse=None):
         super(MDRNNcell, self).__init__(_reuse=reuse, name=name)
-        # save class variables
-        # num_in = 2
+
         self._num_in = num_in
         self._num_units = num_units
         self._state_size = num_units
@@ -61,7 +59,7 @@ class MDRNNcell(tf.contrib.rnn.RNNCell):
 
         preact = input_mul_left + state_mul_left + input_mul_up + state_mul_up  + self.b #Calculating the preactivation
 
-        output = tf.nn.elu(preact) # [batch_sz, num_units] C
+        output = tf.nn.elu(preact) # [batch_sz, num_units]
 
         new_state = output
 
