@@ -77,7 +77,7 @@ class RNNwavefunction(object):
 
     def log_probability(self,samples,inputdim):
         """
-            calculate the log-probabilities of ```samples``
+            calculate the log-probabilities of ```samples`` with a parity symmetry
             ------------------------------------------------------------------------
             Parameters:
 
