@@ -37,7 +37,7 @@ def Ising2D_local_energies(Jz, Bx, Nx, Ny, samples, queue_samples, log_probs_ten
 
         local_energies += np.sum(valuesT*(-Jz[i,:]), axis = 1)
 
-    for i in range(Ny-1): #diagonal elements (upward neighbours)
+    for i in range(Ny-1): #diagonal elements (upward neighbours (or downward, it depends on the way you see the lattice :)))
         values = samples_reshaped[:,:,i]+samples_reshaped[:,:,i+1]
         valuesT = np.copy(values)
         valuesT[values==2] = +1 #If both spins are up
