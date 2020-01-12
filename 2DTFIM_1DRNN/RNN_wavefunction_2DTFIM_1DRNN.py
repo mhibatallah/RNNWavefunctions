@@ -16,7 +16,7 @@ def Ising2D_local_energies(Jz, Bx, Nx, Ny, samples, queue_samples, log_probs_ten
     - Jz: (Nx*Ny) np array
     - Bx: float
     - queue_samples: ((Nx*Ny+1)*numsamples, Nx*Ny) an empty allocated np array to store the non diagonal elements
-    - log_probs_tensor: A TF tensor with size (numsamples)
+    - log_probs_tensor: A TF tensor with size (None)
     - samples_placeholder: A TF placeholder to feed in a set of configurations
     - log_probs: ((Nx*Ny+1)*numsamples): an empty allocated np array to store the log_probs non diagonal elements
     - sess: The current TF session
