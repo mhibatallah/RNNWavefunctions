@@ -4,7 +4,7 @@ import os
 import time
 import random
 
-from ComplexRNN_GRU import RNNwavefunction
+from ComplexRNNwavefunction import RNNwavefunction
 
 #Loading functions:
 # Loading Functions --------------------------
