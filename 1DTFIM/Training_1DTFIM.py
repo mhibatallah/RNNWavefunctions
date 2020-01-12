@@ -4,8 +4,8 @@ import os
 import time
 import random
 
-from RNN_GRU import RNNwavefunction
-# from RNN_GRU_par import RNNwavefunction #To use an RNN that has a parity symmetry (but comment the previous line)
+from RNNwavefunction import RNNwavefunction
+# from RNNwavefunction_par import RNNwavefunction #To use an RNN that has a parity symmetry (but comment the previous line)
 
 # Loading Functions --------------------------
 def Ising_local_energies(Jz, Bx, samples, queue_samples, log_probs_tensor, samples_placeholder, log_probs, sess):
