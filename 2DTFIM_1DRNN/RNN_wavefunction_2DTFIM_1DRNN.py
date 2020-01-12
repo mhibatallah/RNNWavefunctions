@@ -13,7 +13,7 @@ def Ising2D_local_energies(Jz, Bx, Nx, Ny, samples, queue_samples, log_probs_ten
     Returns: The local energies that correspond to the "samples"
     Inputs:
     - samples: (numsamples, Nx*Ny) 
-    - Jz: (Nx*Ny) array
+    - Jz: (Nx*Ny) np array
     - Bx: float
     - queue_samples: ((Nx*Ny+1)*numsamples, Nx*Ny) an empty allocated np array to store the non diagonal elements
     - log_probs_tensor: A TF tensor with size (numsamples)
