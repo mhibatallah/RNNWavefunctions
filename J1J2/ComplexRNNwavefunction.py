@@ -102,7 +102,20 @@ class RNNwavefunction(object):
         return self.samples
 
     def log_amplitude(self,samples,inputdim):
-
+        """
+            calculate the log-ampliturdes of ```samples`` while imposing zero magnetization
+            ------------------------------------------------------------------------
+            Parameters:
+            samples:         tf.Tensor
+                             a tf.placeholder of shape (number of samples,systemsize)
+                             containing the input samples in integer encoding
+            inputdim:        int
+                             dimension of the input space
+            ------------------------------------------------------------------------
+            Returns:
+            log-amps      tf.Tensor of shape (number of samples,)
+                             the log-amplitude of each sample
+            """
         with self.graph.as_default():
 
             self.inputdim=inputdim
