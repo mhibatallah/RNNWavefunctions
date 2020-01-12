@@ -13,7 +13,7 @@ def heavyside(inputs):
     return 0.5*(sign+1.0)
 
 class RNNwavefunction(object):
-    def __init__(self,systemsize,cell=tf.contrib.rnn.BasicRNNCell, activation_rnn = tf.nn.relu, activation_dense = tf.nn.relu,units=[10,10],scope='RNNwavefunction', seed=111):
+    def __init__(self,systemsize,cell=None,units=[10,10],scope='RNNwavefunction', seed=111):
 
         self.graph=tf.Graph()
         self.scope=scope #Label of the RNN wavefunction
@@ -33,7 +33,6 @@ class RNNwavefunction(object):
               self.rnn=tf.nn.rnn_cell.MultiRNNCell([cell(units[n]) for n in range(len(units))])
 
               self.dense_ampl = tf.layers.Dense(2,activation=sqsoftmax,name='wf_dense_ampl')
-              # self.dense_phase = tf.layers.Dense(2,activation=tf.nn.relu,name='wf_dense_phase')
               self.dense_phase = tf.layers.Dense(2,activation=softsign_,name='wf_dense_phase')
 
     def sample(self,numsamples,inputdim):
@@ -58,9 +57,7 @@ class RNNwavefunction(object):
 
                 inputs_ampl = inputs
 
-
                 for n in range(self.N):
-                  #Applying complex RNN (splitting into ampl and phase part) (For every layer)----------------------------------------------
                   rnn_output,rnn_state = self.rnn(inputs_ampl, rnn_state)
 
                   #Applying complex kernels
@@ -74,8 +71,8 @@ class RNNwavefunction(object):
                     activations_down = heavyside(baseline - num_down)
 
                     output_ampl = output_ampl*tf.cast(tf.stack([activations_down,activations_up], axis = 1), tf.float32)
-                    output_ampl = tf.nn.l2_normalize(output_ampl, axis = 1, epsilon = 1e-30) #normalizing
-                  #Applying complex activation function
+                    output_ampl = tf.nn.l2_normalize(output_ampl, axis = 1, epsilon = 1e-30) #l2 normalizing
+
                   sample_temp=tf.reshape(tf.random.categorical(tf.log(output_ampl**2),num_samples=1),[-1,])
                   samples.append(sample_temp)
                   inputs=tf.one_hot(sample_temp,depth=self.outputdim)
@@ -108,7 +105,6 @@ class RNNwavefunction(object):
 
                 for n in range(self.N):
 
-                    #Applying complex RNN (splitting into ampl and phase part) (For every layer)----------------------------------------------
                     rnn_output,rnn_state = self.rnn(inputs_ampl, rnn_state)
 
                     #Applying complex kernels
@@ -123,9 +119,8 @@ class RNNwavefunction(object):
                         activations_down = heavyside(baseline - num_down)
 
                         output_ampl = output_ampl*tf.cast(tf.stack([activations_down,activations_up], axis = 1), tf.float32)
-                        output_ampl = tf.nn.l2_normalize(output_ampl, axis = 1, epsilon = 1e-30) #normalizing
+                        output_ampl = tf.nn.l2_normalize(output_ampl, axis = 1, epsilon = 1e-30) #l2 normalizing
 
-                    #Applying complex activation function
                     amplitude = tf.complex(output_ampl,0.0)*tf.exp(tf.complex(0.0,output_phase)) #You can add a bias
 
                     amplitudes.append(amplitude)
