@@ -41,7 +41,20 @@ class RNNwavefunction(object):
               self.dense_phase = tf.layers.Dense(2,activation=softsign_,name='wf_dense_phase')
 
     def sample(self,numsamples,inputdim):
-
+        """
+            Generate samples from a probability distribution parametrized by a recurrent network
+            We also impose zero magnetization (U(1) symmetry)
+            ------------------------------------------------------------------------
+            Parameters:
+            numsamples:      int
+                             number of samples to be produced
+            inputdim:        int
+                             hilbert space dimension
+            ------------------------------------------------------------------------
+            Returns:      
+            samples:         tf.Tensor of shape (numsamples,systemsize)
+                             the samples in integer encoding
+        """
         with self.graph.as_default(): #Call the default graph, used if willing to create multiple graphs.
             with tf.variable_scope(self.scope,reuse=tf.AUTO_REUSE):
 
