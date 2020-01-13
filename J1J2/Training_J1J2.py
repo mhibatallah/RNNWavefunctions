@@ -136,14 +136,14 @@ def run_J1J2(numsteps = 10**5, systemsize = 20, J1_  = 1.0, J2_ = 0.0, num_units
     units=[num_units]*num_layers #list containing the number of hidden units for each layer of the networks
 
     input_dim=2 #Dimension of the Hilbert space for each site (here = 2, up or down)
-    numsamples=20 #only for initialization; later I'll use a much larger value (see below)
+    numsamples_=20 #only for initialization; later I'll use a much larger value (see below)
     wf=RNNwavefunction(N,units=units,cell=tf.contrib.cudnn_rnn.CudnnCompatibleGRUCell, seed = seed) #contains the graph with the RNNs
      #contains the graph with the RNNs
-    sampling=wf.sample(numsamples,input_dim) #call this function once to create the dense layers
+    sampling=wf.sample(numsamples_,input_dim) #call this function once to create the dense layers
 
 
     with wf.graph.as_default(): #now initialize everything
-        inputs=tf.placeholder(dtype=tf.int32,shape=[numsamples,N]) #the inputs are the samples of all of the spins
+        inputs=tf.placeholder(dtype=tf.int32,shape=[numsamples_,N]) #the inputs are the samples of all of the spins
         #defining adaptive learning rate
         global_step = tf.Variable(0, trainable=False)
         learningrate_placeholder=tf.placeholder(dtype=tf.float32,shape=[])
