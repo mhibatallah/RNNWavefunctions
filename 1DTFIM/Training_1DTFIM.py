@@ -90,14 +90,14 @@ def run_1DTFIM(numsteps = 10**4, systemsize = 20, num_units = 50, Bx = 1, num_la
     units=[num_units]*num_layers #list containing the number of hidden units for each layer of the networks
 
     input_dim=2 #Dimension of the Hilbert space for each site (here = 2, up or down)
-    numsamples=20 #only for initialization; later I'll use a much larger value (see below)
+    numsamples_=20 #only for initialization; later I'll use a much larger value (see below)
 
     wf=RNNwavefunction(N,units=units,cell=tf.contrib.cudnn_rnn.CudnnCompatibleGRUCell, seed = seed) #contains the graph with the RNNs
-    sampling=wf.sample(numsamples,input_dim) #call this function once to create the dense layers
+    sampling=wf.sample(numsamples_,input_dim) #call this function once to create the dense layers
 
     #now initialize everything --------------------
     with wf.graph.as_default():
-        samples_placeholder=tf.placeholder(dtype=tf.int32,shape=[numsamples,N]) #the samples_placeholder are the samples of all of the spins
+        samples_placeholder=tf.placeholder(dtype=tf.int32,shape=[numsamples_,N]) #the samples_placeholder are the samples of all of the spins
         global_step = tf.Variable(0, trainable=False)
         learningrate_placeholder=tf.placeholder(dtype=tf.float64,shape=[])
         learning_rate_withexpdecay = tf.train.exponential_decay(learningrate_placeholder, global_step = global_step, decay_steps = 100, decay_rate = 1.0, staircase=True) #For exponential decay of the learning rate (only works if decay_rate < 1.0)
