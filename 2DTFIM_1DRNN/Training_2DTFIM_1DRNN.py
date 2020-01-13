@@ -94,15 +94,15 @@ def run_2DTFIM(numsteps = 2*10**4, systemsize_x = 5, systemsize_y = 5, Bx = +2, 
     Ny=systemsize_y #y dim
 
     input_dim=2 #Dimension of the Hilbert space for each site (here = 2, up or down)
-    numsamples=20 #only for initialization; later I'll use a much larger value (see below)
+    numsamples_=20 #only for initialization; later I'll use a much larger value (see below)
 
     wf=RNNwavefunction(Nx,Ny,units=units,cell=tf.contrib.cudnn_rnn.CudnnCompatibleGRUCell) #contains the graph with the RNNs
-    sampling=wf.sample(numsamples,input_dim) #call this function once to create the dense layers
+    sampling=wf.sample(numsamples_,input_dim) #call this function once to create the dense layers
 
     #now initialize everything --------------------
     with wf.graph.as_default():
         #We map a 2D configuration into a 1D configuration
-        samples_placeholder=tf.placeholder(dtype=tf.int32,shape=[numsamples,Nx*Ny]) #the samples_placeholder are the samples of all of the spins
+        samples_placeholder=tf.placeholder(dtype=tf.int32,shape=[numsamples_,Nx*Ny]) #the samples_placeholder are the samples of all of the spins
         global_step = tf.Variable(0, trainable=False)
         learningrate_placeholder=tf.placeholder(dtype=tf.float64,shape=[])
         learning_rate_withexpdecay = tf.train.exponential_decay(learningrate_placeholder, global_step = global_step, decay_steps = 100, decay_rate = 1.0, staircase=True) #For exponential decay of the learning rate (only works if decay_rate < 1.0)
