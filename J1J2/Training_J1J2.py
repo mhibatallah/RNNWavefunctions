@@ -120,7 +120,7 @@ def J1J2Slices(J1, J2, Bz, sigmasp, sigmas, H, sigmaH, matrixelements):
 #--------------------------
 
 # ---------------- Running VMC with RNNs for J1J2 Model -------------------------------------
-def run_J1J2(numsteps = 10**5, systemsize = 20, J1_  = 1.0, J2_ = 0.0, num_units = 50, num_layers = 1, num_samples = 500, learningrate = 2.5*1e-4, seed = 111):
+def run_J1J2(numsteps = 10**5, systemsize = 20, J1_  = 1.0, J2_ = 0.0, num_units = 50, num_layers = 1, numsamples = 500, learningrate = 2.5*1e-4, seed = 111):
 
     N=systemsize #Number of spins
     lr = np.float64(learningrate)
