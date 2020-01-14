@@ -11,6 +11,7 @@ Currently, this repository contains four folders, each one is specific for a giv
 - **2DTFIM_1DRNN**: 1D Positive Recurrent Neural Network Wavefunction for 2D TFIM.
 - **2DTFIM_2DRNN**: 2D Positive Recurrent Neural Network Wavefunction for 2D TFIM.
 - **J1J2**: 1D Complex Recurrent Neural Network Wavefunction for 1D J1-J2 Model. PS: if you want to apply an initial Marshall sign on top of the cRNN wavefunction: go to file "Training_J1J2.py", and change **Marshall_sign** argument in the function "J1J2MatrixElements" to **True**.
+The **Check_Points** folder is intended to save the parameters of the RNN wavefunction as well as the energies and the variances after training.
 
 We also plan to support more models and architectures in the future.
 
