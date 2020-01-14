@@ -12,7 +12,7 @@ def Ising_local_energies(Jz, Bx, samples, queue_samples, log_probs_tensor, sampl
     """ To get the local energies of 1D TFIM (OBC) given a set of set of samples in parallel!
     Returns: The local energies that correspond to the "samples"
     Inputs:
-    - samples: (numsamples, N) 
+    - samples: (numsamples, N)
     - Jz: (N) np array
     - Bx: float
     - queue_samples: ((N+1)*numsamples, N) an empty allocated np array to store the non diagonal elements
@@ -26,7 +26,7 @@ def Ising_local_energies(Jz, Bx, samples, queue_samples, log_probs_tensor, sampl
 
     local_energies = np.zeros((numsamples), dtype = np.float64)
 
-    for i in range(N-1): #diagonal elements 
+    for i in range(N-1): #diagonal elements
         values = samples[:,i]+samples[:,i+1]
         valuesT = np.copy(values)
         valuesT[values==2] = +1 #If both spins are up
@@ -140,8 +140,8 @@ def run_1DTFIM(numsteps = 10**4, systemsize = 20, num_units = 50, Bx = 1, num_la
     for u in units:
         ending+='_{0}'.format(u)
 
-    filename='/../Check_Points/TIM/GRU/RNNwavefunction_N'+str(N)+'_samp'+str(numsamples)+'_Jz1Bx'+str(Bx)+'_GRURNN_OBC'+ending + '.ckpt'
-    savename = '_TIM'
+    filename='/../Check_Points/1DTFIM/RNNwavefunction_N'+str(N)+'_samp'+str(numsamples)+'_Jz1Bx'+str(Bx)+'_GRURNN_OBC'+ending + '.ckpt'
+    savename = '_TFIM'
 
     with tf.variable_scope(wf.scope,reuse=tf.AUTO_REUSE):
         with wf.graph.as_default():
@@ -150,8 +150,8 @@ def run_1DTFIM(numsteps = 10**4, systemsize = 20, num_units = 50, Bx = 1, num_la
             log_probs_=wf.log_probability(samp,inputdim=2)
 
             #now calculate the fake cost function to enjoy the properties of automatic differentiation
-            cost = tf.reduce_mean(tf.multiply(log_probs_,Eloc)) - tf.reduce_mean(Eloc)*tf.reduce_mean(log_probs_) 
-            
+            cost = tf.reduce_mean(tf.multiply(log_probs_,Eloc)) - tf.reduce_mean(Eloc)*tf.reduce_mean(log_probs_)
+
             #Calculate Gradients---------------
 
             gradients, variables = zip(*optimizer.compute_gradients(cost))
@@ -171,12 +171,12 @@ def run_1DTFIM(numsteps = 10**4, systemsize = 20, num_units = 50, Bx = 1, num_la
     # ending='_units'
     # for u in units:
     #     ending+='_{0}'.format(u)
-    # savename = '_TIM'
+    # savename = '_TFIM'
     # with tf.variable_scope(wf.scope,reuse=tf.AUTO_REUSE):
     #     with wf.graph.as_default():
     #         saver.restore(sess,path+filename)
-    #         meanEnergy=np.load('../Check_Points/TIM/GRU/meanEnergy_N'+str(N)+'_samp'+str(numsamples)+'_Jz'+str(Jz[0])+'_Bx'+str(Bx)+'_GRURNN_OBC'+ savename + ending + '.npy').tolist()
-    #         varEnergy=np.load('../Check_Points/TIM/GRU/varEnergy_N'+str(N)+'_samp'+str(numsamples)+'_Jz'+str(Jz[0])+'_Bx'+str(Bx)+'_GRURNN_OBC'+ savename + ending + '.npy').tolist()
+    #         meanEnergy=np.load('../Check_Points/1DTFIM/meanEnergy_N'+str(N)+'_samp'+str(numsamples)+'_Jz'+str(Jz[0])+'_Bx'+str(Bx)+'_GRURNN_OBC'+ savename + ending + '.npy').tolist()
+    #         varEnergy=np.load('../Check_Points/1DTFIM/varEnergy_N'+str(N)+'_samp'+str(numsamples)+'_Jz'+str(Jz[0])+'_Bx'+str(Bx)+'_GRURNN_OBC'+ savename + ending + '.npy').tolist()
     #------------------------------------
 
     with tf.variable_scope(wf.scope,reuse=tf.AUTO_REUSE):
@@ -216,19 +216,15 @@ def run_1DTFIM(numsteps = 10**4, systemsize = 20, num_units = 50, Bx = 1, num_la
               if it%1==0:
                   print('mean(E): {0} \pm {1}, #samples {2}, #Step {3} \n\n'.format(meanE,varE,numsamples, it))
 
-              if it>=100 and varE <= np.min(varEnergy): #We do it>100 to start saving the model after we get close to convergence
+              if it>=100 and varE <= np.min(varEnergy): #We do it>100 to start saving the model after we get close to convergence to avoid slowing down due to too many saves initially
                   #Saving the performances if the model is better
                   saver.save(sess,path+'/'+filename)
-                
+
               sess.run(optstep,feed_dict={Eloc:local_energies,samp:samples,learningrate_placeholder: lr})
 
-
-              if it%100==0:
+              if it%10==0:
                   #Saving the performances
-                  np.save('../Check_Points/TIM/GRU/meanEnergy_N'+str(N)+'_samp'+str(numsamples)+'_Jz'+str(Jz[0])+'_Bx'+str(Bx)+'_GRURNN_OBC'+ savename + ending + '.npy',meanEnergy)
-                  np.save('../Check_Points/TIM/GRU/varEnergy_N'+str(N)+'_samp'+str(numsamples)+'_Jz'+str(Jz[0])+'_Bx'+str(Bx)+'_GRURNN_OBC'+ savename + ending + '.npy',varEnergy)
-
-              if it%100==0:
-                  print("Learning rate = " + str(sess.run(learning_rate_withexpdecay,feed_dict={learningrate_placeholder: lr}))+ "\n\n")
+                  np.save('../Check_Points/1DTFIM/meanEnergy_N'+str(N)+'_samp'+str(numsamples)+'_Jz'+str(Jz[0])+'_Bx'+str(Bx)+'_GRURNN_OBC'+ savename + ending + '.npy',meanEnergy)
+                  np.save('../Check_Points/1DTFIM/varEnergy_N'+str(N)+'_samp'+str(numsamples)+'_Jz'+str(Jz[0])+'_Bx'+str(Bx)+'_GRURNN_OBC'+ savename + ending + '.npy',varEnergy)
 
     #----------------------------

@@ -280,17 +280,16 @@ def run_J1J2(numsteps = 10**5, systemsize = 20, J1_  = 1.0, J2_ = 0.0, num_units
               meanEnergy.append(meanE)
               varEnergy.append(varE)
 
-              if it%1==0:
-                  print('mean(E): {0} \pm {1}, #samples {2}, #Step {3} \n\n'.format(meanE,varE,numsamples, it))
+              print('mean(E): {0} \pm {1}, #samples {2}, #Step {3} \n\n'.format(meanE,varE,numsamples, it))
 
-              if it%50==0:
+              if it%10==0:
                  np.save('../Check_Points/J1J2/meanEnergy_N'+str(N)+'_samp'+str(numsamples)+'_lradap'+str(lr)+'_complexGRURNN'+ savename + ending +'_zeromag.npy',meanEnergy)
                  np.save('../Check_Points/J1J2/varEnergy_N'+str(N)+'_samp'+str(numsamples)+'_lradap'+str(lr)+'_complexGRURNN'+ savename + ending +'_zeromag.npy',varEnergy)
 
-              if it>=5000 and varE <= np.min(varEnergy):
+              if it>=500 and varE <= np.min(varEnergy[100:]): #500 can be changed to suite your chosen number of iterations and to avoid slow down by saving the model too often during the initial phase of fast convergence, we also do varEnergy[100:] to skip the initial local minima where variance is small
                  #Saving the performances if the model is better
                  saver.save(sess,path+'/'+filename)
-                
+
               lr_ = 1/((1/lr)+(it/10)) #learning rate decay
               sess.run(optstep,feed_dict={Eloc:local_energies,samp:samples,learningrate_placeholder: lr_})
     #----------------------------------------

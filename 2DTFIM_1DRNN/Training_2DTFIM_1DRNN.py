@@ -12,7 +12,7 @@ def Ising2D_local_energies(Jz, Bx, Nx, Ny, samples, queue_samples, log_probs_ten
     """ To get the local energies of 2D TFIM (OBC) given a set of set of samples in parallel!
     Returns: The local energies that correspond to the "samples"
     Inputs:
-    - samples: (numsamples, Nx*Ny) 
+    - samples: (numsamples, Nx*Ny)
     - Jz: (Nx*Ny) np array
     - Bx: float
     - queue_samples: ((Nx*Ny+1)*numsamples, Nx*Ny) an empty allocated np array to store the non diagonal elements
@@ -122,7 +122,7 @@ def run_2DTFIM(numsteps = 2*10**4, systemsize_x = 5, systemsize_y = 5, Bx = +2, 
 
 
     #Building the graph -------------------
-    
+
     path=os.getcwd()
 
     print('Training with numsamples = ', numsamples)
@@ -135,22 +135,22 @@ def run_2DTFIM(numsteps = 2*10**4, systemsize_x = 5, systemsize_y = 5, Bx = +2, 
     ending='units'
     for u in units:
         ending+='_{0}'.format(u)
-    filename='../Check_Points/2DTIM/GRU/RNNwavefunction_GRURNN_'+str(Nx)+'x'+ str(Ny) +'_Bx'+str(Bx)+'_lradap'+str(lr)+'_samp'+str(numsamples)+ending+'.ckpt'
-    savename = '_2DTIM'
+    filename='../Check_Points/2DTFIM/RNNwavefunction_GRURNN_'+str(Nx)+'x'+ str(Ny) +'_Bx'+str(Bx)+'_lradap'+str(lr)+'_samp'+str(numsamples)+ending+'.ckpt'
+    savename = '_2DTFIM'
 
     with tf.variable_scope(wf.scope,reuse=tf.AUTO_REUSE):
         with wf.graph.as_default():
             Eloc=tf.placeholder(dtype=tf.float64,shape=[numsamples])
             samp=tf.placeholder(dtype=tf.int32,shape=[numsamples,Nx*Ny])
             log_probs_=wf.log_probability(samp,inputdim=2)
-           
+
             #now calculate the fake cost function to enjoy the properties of automatic differentiation
             cost = tf.reduce_mean(tf.multiply(log_probs_,tf.stop_gradient(Eloc))) - tf.reduce_mean(tf.stop_gradient(Eloc))*tf.reduce_mean(log_probs_)
 
             #Calculate Gradients---------------
             gradients, variables = zip(*optimizer.compute_gradients(cost))
             #End calculate Gradients---------------
-            
+
             optstep=optimizer.apply_gradients(zip(gradients,variables),global_step=global_step)
             sess.run(tf.variables_initializer(optimizer.variables()),feed_dict={learning_rate_withexpdecay: lr})
 
@@ -167,12 +167,12 @@ def run_2DTFIM(numsteps = 2*10**4, systemsize_x = 5, systemsize_y = 5, Bx = +2, 
     # ending='units'
     # for u in units:
     #     ending+='_{0}'.format(u)
-    # savename = '_2DTIM'
+    # savename = '_2DTFIM'
     # with tf.variable_scope(wf.scope,reuse=tf.AUTO_REUSE):
     #     with wf.graph.as_default():
     #         saver.restore(sess,path+'/'+filename)
-    #         meanEnergy=np.load('../Check_Points/2DTIM/GRU/meanEnergy_GRURNN_'+str(Nx)+'x'+ str(Ny) +'_Bx'+str(Bx)+'_lradap'+str(lr)+'_samp'+str(numsamples)+ending  + savename +'.npy').tolist()
-    #         varEnergy=np.load('../Check_Points/2DTIM/GRU/varEnergy_GRURNN_'+str(Nx)+'x'+ str(Ny) +'_Bx'+str(Bx)+'_lradap'+str(lr)+'_samp'+str(numsamples)+ending  + savename +'.npy').tolist()
+    #         meanEnergy=np.load('../Check_Points/2DTFIM/meanEnergy_GRURNN_'+str(Nx)+'x'+ str(Ny) +'_Bx'+str(Bx)+'_lradap'+str(lr)+'_samp'+str(numsamples)+ending  + savename +'.npy').tolist()
+    #         varEnergy=np.load('../Check_Points/2DTFIM/varEnergy_GRURNN_'+str(Nx)+'x'+ str(Ny) +'_Bx'+str(Bx)+'_lradap'+str(lr)+'_samp'+str(numsamples)+ending  + savename +'.npy').tolist()
     #-----------
 
     with tf.variable_scope(wf.scope,reuse=tf.AUTO_REUSE):
@@ -211,14 +211,14 @@ def run_2DTFIM(numsteps = 2*10**4, systemsize_x = 5, systemsize_y = 5, Bx = +2, 
 
                 print('mean(E): {0} \pm {1}, #samples {2}, #Step {3} \n\n'.format(meanE,varE,numsamples, it))
 
-                if it>=1000 and varE <= np.min(varEnergy): #We do it>1000 to start saving the model after we get close to convergence
+                if it>=1000 and varE <= np.min(varEnergy): #We do it>100 to start saving the model after we get close to convergence to avoid slowing down due to too many saves initially
                     #Saving the performances if the model is better
                     saver.save(sess,path+'/'+filename)
 
-                if it%100==0:
+                if it%10==0:
                   #Saving the performances
-                  np.save('../Check_Points/2DTIM/GRU/meanEnergy_GRURNN_'+str(Nx)+'x'+ str(Ny) +'_Bx'+str(Bx)+'_lradap'+str(lr)+'_samp'+str(numsamples)+ending  + savename +'.npy', meanEnergy)
-                  np.save('../Check_Points/2DTIM/GRU/varEnergy_GRURNN_'+str(Nx)+'x'+ str(Ny) +'_Bx'+str(Bx)+'_lradap'+str(lr)+'_samp'+str(numsamples)+ending + savename +'.npy', varEnergy)
+                  np.save('../Check_Points/2DTFIM/meanEnergy_GRURNN_'+str(Nx)+'x'+ str(Ny) +'_Bx'+str(Bx)+'_lradap'+str(lr)+'_samp'+str(numsamples)+ending  + savename +'.npy', meanEnergy)
+                  np.save('../Check_Points/2DTFIM/varEnergy_GRURNN_'+str(Nx)+'x'+ str(Ny) +'_Bx'+str(Bx)+'_lradap'+str(lr)+'_samp'+str(numsamples)+ending + savename +'.npy', varEnergy)
 
                 #lr decay
                 lr_ = 1/((1/lr)+(it/10))

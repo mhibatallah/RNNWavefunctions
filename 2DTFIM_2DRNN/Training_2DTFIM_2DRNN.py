@@ -12,7 +12,7 @@ def Ising2D_local_energies(Jz, Bx, Nx, Ny, samples, queue_samples, log_probs_ten
     """ To get the local energies of 2D TFIM (OBC) given a set of set of samples in parallel!
     Returns: The local energies that correspond to the "samples"
     Inputs:
-    - samples: (numsamples, Nx,Ny) 
+    - samples: (numsamples, Nx,Ny)
     - Jz: (Nx,Ny) np array
     - Bx: float
     - queue_samples: ((Nx*Ny+1)*numsamples, Nx,Ny) an empty allocated np array to store the non diagonal elements
@@ -21,7 +21,7 @@ def Ising2D_local_energies(Jz, Bx, Nx, Ny, samples, queue_samples, log_probs_ten
     - log_probs: ((Nx*Ny+1)*numsamples): an empty allocated np array to store the log_probs non diagonal elements
     - sess: The current TF session
     """
-    
+
     numsamples = samples.shape[0]
 
     N = Nx*Ny #Total number of spins
@@ -63,7 +63,7 @@ def Ising2D_local_energies(Jz, Bx, Nx, Ny, samples, queue_samples, log_probs_ten
 
     len_sigmas = (N+1)*numsamples
     steps = len_sigmas//20000+1 #I want a maximum of 25000 in batch size just to not allocate too much memory
-    print("Total num of step =", steps)
+    # print("Total num of steps =", steps)
     queue_samples_reshaped = np.reshape(queue_samples, [(N+1)*numsamples, Nx,Ny])
     for i in range(steps):
       if i < steps-1:
@@ -71,7 +71,7 @@ def Ising2D_local_energies(Jz, Bx, Nx, Ny, samples, queue_samples, log_probs_ten
       else:
           cut = slice((i*len_sigmas)//steps,len_sigmas)
       log_probs[cut] = sess.run(log_probs_tensor, feed_dict={samples_placeholder:queue_samples_reshaped[cut]})
-      print(i)
+      # print(i)
 
     log_probs_reshaped = np.reshape(log_probs, [N+1,numsamples])
     for j in range(numsamples):
@@ -151,8 +151,8 @@ def run_2DTFIM(numsteps = 2*10**4, systemsize_x = 5, systemsize_y = 5, Bx = +2, 
     ending='units'
     for u in units:
         ending+='_{0}'.format(u)
-    filename='../Check_Points/2DTIM/Vanilla/RNNwavefunction_2DVanillaRNN_'+str(Nx)+'x'+ str(Ny) +'_Bx'+str(Bx)+'_lradap'+str(lr)+'_samp'+str(numsamples)+ending+'.ckpt'
-    savename = '_2DTIM'
+    filename='../Check_Points/2DTFIM/RNNwavefunction_2DVanillaRNN_'+str(Nx)+'x'+ str(Ny) +'_Bx'+str(Bx)+'_lradap'+str(lr)+'_samp'+str(numsamples)+ending+'.ckpt'
+    savename = '_2DTFIM'
 
     with tf.variable_scope(wf.scope,reuse=tf.AUTO_REUSE):
         with wf.graph.as_default():
@@ -174,8 +174,8 @@ def run_2DTFIM(numsteps = 2*10**4, systemsize_x = 5, systemsize_y = 5, Bx = +2, 
     # with tf.variable_scope(wf.scope,reuse=tf.AUTO_REUSE):
     #     with wf.graph.as_default():
     #         saver.restore(sess,path+'/'+filename)
-    #         meanEnergy=np.load('../Check_Points/2DTIM/Vanilla/meanEnergy_2DVanillaRNN_'+str(Nx)+'x'+ str(Ny) +'_Bx'+str(Bx)+'_lradap'+str(lr)+'_samp'+str(numsamples)+ending  + savename +'.npy').tolist()
-    #         varEnergy=np.load('../Check_Points/2DTIM/Vanilla/varEnergy_2DVanillaRNN_'+str(Nx)+'x'+ str(Ny) +'_Bx'+str(Bx)+'_lradap'+str(lr)+'_samp'+str(numsamples)+ending  + savename +'.npy').tolist()
+    #         meanEnergy=np.load('../Check_Points/2DTFIM/meanEnergy_2DVanillaRNN_'+str(Nx)+'x'+ str(Ny) +'_Bx'+str(Bx)+'_lradap'+str(lr)+'_samp'+str(numsamples)+ending  + savename +'.npy').tolist()
+    #         varEnergy=np.load('../Check_Points/2DTFIM/varEnergy_2DVanillaRNN_'+str(Nx)+'x'+ str(Ny) +'_Bx'+str(Bx)+'_lradap'+str(lr)+'_samp'+str(numsamples)+ending  + savename +'.npy').tolist()
     #-----------
 
 
@@ -199,7 +199,6 @@ def run_2DTFIM(numsteps = 2*10**4, systemsize_x = 5, systemsize_y = 5, Bx = +2, 
                 end = time.time()
                 print("sampling ended: "+ str(end - start))
 
-
                 #Estimating local_energies
                 local_energies = Ising2D_local_energies(Jz, Bx, Nx, Ny, samples, queue_samples, log_probs_tensor, samples_placeholder, log_probs, sess)
 
@@ -212,14 +211,14 @@ def run_2DTFIM(numsteps = 2*10**4, systemsize_x = 5, systemsize_y = 5, Bx = +2, 
 
                 print('mean(E): {0} \pm {1}, #samples {2}, #Step {3} \n\n'.format(meanE,varE,numsamples, it))
 
-                if it>=5000 and varE <= np.min(varEnergy):
+                if it>=5000 and varE <= np.min(varEnergy): #5000 can be changed to suite your chosen number of iterations and to avoid slow down by saving the model too often during the initial phase of fast convergence
                   #Saving the performances if the model is better
                   saver.save(sess,path+'/'+filename)
 
-                if it%1==0:
+                if it%10==0:
                   #Saving the performances
-                  np.save('../Check_Points/2DTIM/Vanilla/meanEnergy_2DVanillaRNN_'+str(Nx)+'x'+ str(Ny) +'_Bx'+str(Bx)+'_lradap'+str(lr)+'_samp'+str(numsamples)+ending  + savename +'.npy', meanEnergy)
-                  np.save('../Check_Points/2DTIM/Vanilla/varEnergy_2DVanillaRNN_'+str(Nx)+'x'+ str(Ny) +'_Bx'+str(Bx)+'_lradap'+str(lr)+'_samp'+str(numsamples)+ending + savename +'.npy', varEnergy)
+                  np.save('../Check_Points/2DTFIM/meanEnergy_2DVanillaRNN_'+str(Nx)+'x'+ str(Ny) +'_Bx'+str(Bx)+'_lradap'+str(lr)+'_samp'+str(numsamples)+ending  + savename +'.npy', meanEnergy)
+                  np.save('../Check_Points/2DTFIM/varEnergy_2DVanillaRNN_'+str(Nx)+'x'+ str(Ny) +'_Bx'+str(Bx)+'_lradap'+str(lr)+'_samp'+str(numsamples)+ending + savename +'.npy', varEnergy)
 
                 #lr_adaptation
                 lr_ = lr*(1+it/5000)**(-1)
