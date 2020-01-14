@@ -7,9 +7,9 @@ Our implementation is based on TensorFlow 1 and we plan to support TensorFlow 2 
 ## Running Variational Monte Carlo (VMC) Calculations
 
 Currently, this repository contains four folders, each one is specific for a given model and architecuture in the following order:
-- **1DTFIM**: 1D Positive Recurrent Neural Network Wavefunction for 1D Transverse-field Ising Model (TFIM).
-- **2DTFIM_1DRNN**: 1D Positive Recurrent Neural Network Wavefunction for 2D TFIM.
-- **2DTFIM_2DRNN**: 2D Positive Recurrent Neural Network Wavefunction for 2D TFIM.
+- **"1DTFIM"**: 1D Positive Recurrent Neural Network Wavefunction for 1D Transverse-field Ising Model (TFIM).
+- **"2DTFIM_1DRNN"**: 1D Positive Recurrent Neural Network Wavefunction for 2D TFIM.
+- **"2DTFIM_2DRNN"**: 2D Positive Recurrent Neural Network Wavefunction for 2D TFIM.
 - **"J1J2"**: 1D Complex Recurrent Neural Network Wavefunction for 1D J1-J2 Model. PS: if you want to apply an initial Marshall sign on top of the cRNN wavefunction: go to file **"Training_J1J2.py"**, and change **Marshall_sign** argument in the function "J1J2MatrixElements" to **True**.
 
 The **Check_Points** folder is intended to save the parameters of the RNN wavefunction as well as the energies and the variances after training.
