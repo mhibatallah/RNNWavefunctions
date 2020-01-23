@@ -38,7 +38,7 @@ class RNNwavefunction(object):
             numsamples:      int
                              number of samples to be produced
             inputdim:        int
-                             hilbert space dimension
+                             hilbert space dimension of one spin
 
             ------------------------------------------------------------------------
             Returns:      
