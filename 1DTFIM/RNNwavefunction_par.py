@@ -39,7 +39,7 @@ class RNNwavefunction(object):
             numsamples:      int
                              number of samples to be produced
             inputdim:        int
-                             hilbert space dimension
+                             hilbert space dimension of one spin
 
             ------------------------------------------------------------------------
             Returns:      
@@ -52,7 +52,7 @@ class RNNwavefunction(object):
             with tf.variable_scope(self.scope,reuse=tf.AUTO_REUSE):
                 b=np.zeros((numsamples,inputdim)).astype(np.float64)
                 b[:,0]=np.zeros(numsamples)
-                #b = sigma_0 for all the samples, this command above makes all the samples having 1 in the first component and 0 in the second.
+                #b = state of sigma_0 for all the samples
 
                 inputs=tf.constant(dtype=tf.float32,value=b,shape=[numsamples,inputdim]) #Feed the table b in tf.
                 #Initial input to feed to the rnn
