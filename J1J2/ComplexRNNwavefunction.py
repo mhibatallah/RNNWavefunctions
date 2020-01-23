@@ -59,11 +59,11 @@ class RNNwavefunction(object):
         with self.graph.as_default(): #Call the default graph, used if willing to create multiple graphs.
             with tf.variable_scope(self.scope,reuse=tf.AUTO_REUSE):
 
-                a=tf.ones(numsamples, dtype=tf.float32)
+                a=tf.zeros(numsamples, dtype=tf.float32)
                 b=tf.zeros(numsamples, dtype=tf.float32)
 
                 inputs=tf.stack([a,b], axis = 1)
-                #Initial input to feed to the RNN
+                #Initial input to feed to the cRNN
 
                 self.inputdim=inputs.shape[1]
                 self.outputdim=self.inputdim
@@ -122,7 +122,7 @@ class RNNwavefunction(object):
             self.outputdim=self.inputdim
 
             self.numsamples=tf.shape(samples)[0]
-            a=tf.ones(self.numsamples, dtype=tf.float32)
+            a=tf.zeros(self.numsamples, dtype=tf.float32)
             b=tf.zeros(self.numsamples, dtype=tf.float32)
 
             inputs=tf.stack([a,b], axis = 1)
