@@ -50,7 +50,7 @@ class RNNwavefunction(object):
             numsamples:      int
                              number of samples to be produced
             inputdim:        int
-                             hilbert space dimension
+                             hilbert space dimension of one spin
             ------------------------------------------------------------------------
             Returns:      
             samples:         tf.Tensor of shape (numsamples,systemsize)
@@ -63,7 +63,7 @@ class RNNwavefunction(object):
                 b=tf.zeros(numsamples, dtype=tf.float32)
 
                 inputs=tf.stack([a,b], axis = 1)
-                #Initial input to feed to the cRNN
+                #Initial input sigma_0 to feed to the cRNN
 
                 self.inputdim=inputs.shape[1]
                 self.outputdim=self.inputdim
