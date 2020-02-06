@@ -6,7 +6,7 @@ Our implementation is based on TensorFlow 1 and we plan to support TensorFlow 2 
 
 ## Running Variational Monte Carlo (VMC) Calculations
 
-Currently, this repository contains four folders, each one is specific for a given model and architecuture in the following order:
+**Currently, this repository contains four folders, each one is specific for a given model and architecuture in the following order:**
 - **"1DTFIM"**: 1D Positive Recurrent Neural Network Wavefunction for 1D Transverse-field Ising Model (TFIM).
 - **"2DTFIM_1DRNN"**: 1D Positive Recurrent Neural Network Wavefunction for 2D TFIM.
 - **"2DTFIM_2DRNN"**: 2D Positive Recurrent Neural Network Wavefunction for 2D TFIM.
