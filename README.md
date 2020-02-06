@@ -16,6 +16,6 @@ The **"Check_Points"** folder is intended to save the parameters of the RNN wave
 
 To run a VMC calculation for the task of finding the ground state energy of a certain model, it is enough to execute the python run file in a folder of interest.
 
-We plan to support more models and architectures in the future.
+We plan to support more models and architectures in the future. Also, future contributions would be really appreciated.
 
-For further questions or inquiries, please feel free to send an email to mohamed.hibat.allah@uwaterloo.ca. Future contributions would be really appreciated.
+For further questions or inquiries, please feel free to send an email to mohamed.hibat.allah@uwaterloo.ca.
