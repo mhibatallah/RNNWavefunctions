@@ -1,4 +1,4 @@
-# RNN Wavefunctions
+# Recurrent Neural Network Wavefunctions
 
 RNN Wavefunctions are efficient quantum many-body wavefunction ansätzes based on Recurrent Neural Networks. These wavefunction can be used to find the ground state of a quantum many-body Hamiltonian using Variational Monte Carlo (VMC). In our recent paper (**arxiv link**), we show that this novel architecture can provide accurate estimations of ground state energies, correlation functions as well as entanglement entropies.
 
