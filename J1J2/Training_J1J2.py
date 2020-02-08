@@ -176,8 +176,6 @@ def run_J1J2(numsteps = 10**5, systemsize = 20, J1_  = 1.0, J2_ = 0.0, num_units
     for u in units:
         ending+='_{0}'.format(u)
 
-    numsamples = 500
-
     savename = '_J1J2'+str(J2[0])
 
     filename='/../Check_Points/J1J2/RNNwavefunction_N'+str(N)+'_samp'+str(numsamples)+'_lradap'+str(lr)+'_complexGRURNN'+ savename + ending +'_zeromag.ckpt'
