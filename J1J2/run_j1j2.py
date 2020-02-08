@@ -1,6 +1,5 @@
 from Training_J1J2 import run_J1J2
 
-
 #numsteps = number of training iterations
 #systemsize = the number of physical spins
 #J1_, J2_ = the coupling parameters of the J1-J2 Hamiltonian
