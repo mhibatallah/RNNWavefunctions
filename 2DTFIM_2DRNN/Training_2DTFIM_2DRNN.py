@@ -209,7 +209,7 @@ def run_2DTFIM(numsteps = 2*10**4, systemsize_x = 5, systemsize_y = 5, Bx = +2, 
                 meanEnergy.append(meanE)
                 varEnergy.append(varE)
 
-                print('mean(E): {0} \pm {1}, #samples {2}, #Step {3} \n\n'.format(meanE,varE,numsamples, it))
+                print('mean(E): {0}, var(E): {1}, #samples {2}, #Step {3} \n\n'.format(meanE,varE,numsamples, it))
 
                 if it>=5000 and varE <= np.min(varEnergy): #5000 can be changed to suite your chosen number of iterations and to avoid slow down by saving the model too often during the initial phase of fast convergence
                   #Saving the performances if the model is better
