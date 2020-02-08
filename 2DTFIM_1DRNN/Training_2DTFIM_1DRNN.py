@@ -209,7 +209,7 @@ def run_2DTFIM(numsteps = 2*10**4, systemsize_x = 5, systemsize_y = 5, Bx = +2, 
                 meanEnergy.append(meanE)
                 varEnergy.append(varE)
 
-                print('mean(E): {0} \pm {1}, #samples {2}, #Step {3} \n\n'.format(meanE,varE,numsamples, it))
+                print('mean(E): {0}, var(E): {1}, #samples {2}, #Step {3} \n\n'.format(meanE,varE,numsamples, it))
 
                 if it>=1000 and varE <= np.min(varEnergy): #We do it>100 to start saving the model after we get close to convergence to avoid slowing down due to too many saves initially
                     #Saving the performances if the model is better
