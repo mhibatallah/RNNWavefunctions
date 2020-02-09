@@ -1,4 +1,5 @@
 import tensorflow as tf
+tf.compat.v1.logging.set_verbosity(tf.compat.v1.logging.ERROR) #stop displaying tensorflow warnings
 import numpy as np
 import os
 import time
@@ -195,14 +196,8 @@ def run_1DTFIM(numsteps = 10**4, systemsize = 20, num_units = 50, Bx = 1, num_la
 
           for it in range(len(meanEnergy),numsteps+1):
 
-              print("sampling started")
-              start = time.time()
-
               samples=sess.run(samples_)
-
-              end = time.time()
-              print("sampling ended: "+ str(end - start))
-
+                
               #Estimating local_energies
               local_energies = Ising_local_energies(Jz, Bx, samples, queue_samples, log_probs_tensor, samples_placeholder, log_probs, sess)
 
@@ -213,18 +208,21 @@ def run_1DTFIM(numsteps = 10**4, systemsize = 20, num_units = 50, Bx = 1, num_la
               meanEnergy.append(meanE)
               varEnergy.append(varE)
 
-              if it%1==0:
+              if it%10==0:
                   print('mean(E): {0}, var(E): {1}, #samples {2}, #Step {3} \n\n'.format(meanE,varE,numsamples, it))
 
+             #Comment if you don't want to save
               if it>=100 and varE <= np.min(varEnergy): #We do it>100 to start saving the model after we get close to convergence to avoid slowing down due to too many saves initially
                   #Saving the performances if the model is better
                   saver.save(sess,path+'/'+filename)
 
               sess.run(optstep,feed_dict={Eloc:local_energies,samp:samples,learningrate_placeholder: lr})
 
+             #Comment if you don't want to save
               if it%10==0:
                   #Saving the performances
                   np.save('../Check_Points/1DTFIM/meanEnergy_N'+str(N)+'_samp'+str(numsamples)+'_Jz'+str(Jz[0])+'_Bx'+str(Bx)+'_GRURNN_OBC'+ savename + ending + '.npy',meanEnergy)
                   np.save('../Check_Points/1DTFIM/varEnergy_N'+str(N)+'_samp'+str(numsamples)+'_Jz'+str(Jz[0])+'_Bx'+str(Bx)+'_GRURNN_OBC'+ savename + ending + '.npy',varEnergy)
-
+    
+    return meanEnergy, varEnergy
     #----------------------------
