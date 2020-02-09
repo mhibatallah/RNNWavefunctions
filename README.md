@@ -23,3 +23,5 @@ This repository contains the following folders:
 We plan to support more models and architectures in the future.
 
 For further questions or inquiries, please feel free to send an email to mohamed.hibat.allah@uwaterloo.ca. Future contributions would be really appreciated.
+
+### Citation
