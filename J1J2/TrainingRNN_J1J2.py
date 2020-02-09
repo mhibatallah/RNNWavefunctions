@@ -1,4 +1,5 @@
 import tensorflow as tf
+tf.compat.v1.logging.set_verbosity(tf.compat.v1.logging.ERROR) #stop displaying tensorflow warnings
 import numpy as np
 import os
 import time
@@ -290,4 +291,7 @@ def run_J1J2(numsteps = 10**5, systemsize = 20, J1_  = 1.0, J2_ = 0.0, num_units
 
               lr_ = 1/((1/lr)+(it/10)) #learning rate decay
               sess.run(optstep,feed_dict={Eloc:local_energies,samp:samples,learningrate_placeholder: lr_})
-    #----------------------------------------
+
+    return meanEnergy, varEnergy
+ 
+#----------------------------------------
