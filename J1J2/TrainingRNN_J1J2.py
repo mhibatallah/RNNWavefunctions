@@ -86,7 +86,7 @@ def J1J2MatrixElements(J1,J2,Bz,sigmap, sigmaH, matrixelements, periodic = False
             num += 1
     return num
 
-def J1J2Slices(J1, J2, Bz, sigmasp, sigmas, H, sigmaH, matrixelements):
+def J1J2Slices(J1, J2, Bz, sigmasp, sigmas, H, sigmaH, matrixelements, Marshall_sign):
     """
     Returns: A tuple -The list of slices (that will help to slice the array sigmas)
              -Total number of configurations after applying the Hamiltonian on the list of samples sigmasp (This will be useful later during training, note that it is not constant for J1J2 as opposed to TFIM)
@@ -108,7 +108,7 @@ def J1J2Slices(J1, J2, Bz, sigmasp, sigmas, H, sigmaH, matrixelements):
 
     for n in range(sigmasp.shape[0]):
         sigmap=sigmasp[n,:]
-        num = J1J2MatrixElements(J1,J2,Bz,sigmap, sigmaH, matrixelements)#note that sigmas[0,:]==sigmap, matrixelements and sigmaH are updated
+        num = J1J2MatrixElements(J1,J2,Bz,sigmap, sigmaH, matrixelements, Marshall_sign)#note that sigmas[0,:]==sigmap, matrixelements and sigmaH are updated
         slices.append(slice(sigmas_length,sigmas_length + num))
         s = slices[n]
 
@@ -121,7 +121,7 @@ def J1J2Slices(J1, J2, Bz, sigmasp, sigmas, H, sigmaH, matrixelements):
 #--------------------------
 
 # ---------------- Running VMC with RNNs for J1J2 Model -------------------------------------
-def run_J1J2(numsteps = 10**5, systemsize = 20, J1_  = 1.0, J2_ = 0.0, num_units = 50, num_layers = 1, numsamples = 500, learningrate = 2.5*1e-4, seed = 111):
+def run_J1J2(numsteps = 10**5, systemsize = 20, J1_  = 1.0, J2_ = 0.0, Marshall_sign = False, num_units = 50, num_layers = 1, numsamples = 500, learningrate = 2.5*1e-4, seed = 111):
 
     N=systemsize #Number of spins
     lr = np.float64(learningrate)
@@ -234,19 +234,19 @@ def run_J1J2(numsteps = 10**5, systemsize = 20, J1_  = 1.0, J2_ = 0.0, num_units
 
           for it in range(len(meanEnergy),numsteps+1):
 
-              print("sampling started")
+#               print("sampling started")
 
-              start = time.time()
+#               start = time.time()
 
               samples=sess.run(samples_)
 
-              end = time.time()
-              print("sampling ended: "+ str(end - start))
+#               end = time.time()
+#               print("sampling ended: "+ str(end - start))
 
-              print("Magnetization = ", np.mean(2*samples - 1))
+#               print("Magnetization = ", np.mean(2*samples - 1))
 
               #Getting the sigmas with the matrix elements
-              slices, len_sigmas = J1J2Slices(J1,J2,Bz,samples, sigmas, H, sigmaH, matrixelements)
+              slices, len_sigmas = J1J2Slices(J1,J2,Bz,samples, sigmas, H, sigmaH, matrixelements, Marshall_sign)
 
               #Process in steps to get log amplitudes
               # print("Generating log amplitudes Started")
