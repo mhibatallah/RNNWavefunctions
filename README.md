@@ -8,7 +8,7 @@ Our implementation is based on TensorFlow 1 and we plan to support TensorFlow 2 
 
 This repository contains the following folders:
 
-* **1DTFIM**: 1D Positive Recurrent Neural Network (pRNN) Wavefunction for 1D Transverse-field Ising Model (TFIM).
+* **1DTFIM**: 1D Positive Recurrent Neural Network (pRNN) Wavefunction for 1D Transverse-field Ferromagnetic Ising Model (TFIM).
 
 * **2DTFIM_1DRNN**: 1D Positive Recurrent Neural Network Wavefunction for 2D TFIM.
 
