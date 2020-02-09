@@ -1,4 +1,4 @@
-from Training_J1J2 import run_J1J2
+from TrainingRNN_J1J2 import run_J1J2
 
 #numsteps = number of training iterations
 #systemsize = the number of physical spins
