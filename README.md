@@ -27,7 +27,7 @@ For further questions or inquiries, please feel free to send an email to mohamed
 ### Citation:
 If you would like to cite this work, you can use the bibtex code below:
 ```bibtex
-@article{....,
+@article{RNNWavefunctions,
   title = {Recurrent Neural Network Wavefunctions},
   author = {Mohamed Hibat-Allah, Martin Ganahl, Lauren E. Hayward, Roger G. Melko, Juan Carrasquilla},
 }
