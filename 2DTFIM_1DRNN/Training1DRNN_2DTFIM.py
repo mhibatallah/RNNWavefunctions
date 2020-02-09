@@ -1,4 +1,5 @@
 import tensorflow as tf
+tf.compat.v1.logging.set_verbosity(tf.compat.v1.logging.ERROR) #stop displaying tensorflow warnings
 import numpy as np
 import os
 import time
@@ -209,12 +210,15 @@ def run_2DTFIM(numsteps = 2*10**4, systemsize_x = 5, systemsize_y = 5, Bx = +2, 
                 meanEnergy.append(meanE)
                 varEnergy.append(varE)
 
-                print('mean(E): {0}, var(E): {1}, #samples {2}, #Step {3} \n\n'.format(meanE,varE,numsamples, it))
-
+                if it%10==0:
+                    print('mean(E): {0}, var(E): {1}, #samples {2}, #Step {3} \n\n'.format(meanE,varE,numsamples, it))
+                
+                #Comment if you don't want to save if saving gives you errors
                 if it>=1000 and varE <= np.min(varEnergy): #We do it>100 to start saving the model after we get close to convergence to avoid slowing down due to too many saves initially
                     #Saving the performances if the model is better
                     saver.save(sess,path+'/'+filename)
-
+                
+                #Comment if you don't want to save if saving gives you errors
                 if it%10==0:
                   #Saving the performances
                   np.save('../Check_Points/2DTFIM/meanEnergy_GRURNN_'+str(Nx)+'x'+ str(Ny) +'_Bx'+str(Bx)+'_lradap'+str(lr)+'_samp'+str(numsamples)+ending  + savename +'.npy', meanEnergy)
@@ -224,3 +228,5 @@ def run_2DTFIM(numsteps = 2*10**4, systemsize_x = 5, systemsize_y = 5, Bx = +2, 
                 lr_ = 1/((1/lr)+(it/10))
                 #Optimization step
                 sess.run(optstep,feed_dict={Eloc:local_energies,samp:samples,learningrate_placeholder: lr_})
+
+    return meanEnergy, varEnergy
