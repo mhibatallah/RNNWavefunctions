@@ -16,7 +16,7 @@ This repository contains the following folders:
 
 > **J1J2**: 1D Complex Recurrent Neural Network (cRNN) Wavefunction for 1D J1-J2 Model.
 
-> **Tutorials**: this folder contains jupyter notebooks that you can run on Google colaboratory (with a free GPU on colab.research.google.com/) to test pRNN wavefunctions on 1DTFIM and cRNN wavefunctions on 1D J1J2. These notebook will also help you to get a clearer idea about how to use the remaining code the previous folders for further inverstigations.
+> **Tutorials**: this folder contains jupyter notebooks that you can run on Google colaboratory (with a free GPU on colab.research.google.com/) to test pRNN wavefunctions on 1DTFIM and cRNN wavefunctions on 1D J1J2. These notebooks will also help you to get a clearer idea on how to use the remaining code in the previous folders for further investigations.
 
 > **Check_Points**: this folder is intended to save the parameters of the RNN wavefunction as well as the energies and the variances after training.
 
