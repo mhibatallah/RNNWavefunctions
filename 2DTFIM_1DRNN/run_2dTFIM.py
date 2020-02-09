@@ -1,4 +1,4 @@
-from Training_2DTFIM_1DRNN import run_2DTFIM
+from Training1DRNN_2DTFIM import run_2DTFIM
 
 #numsteps = number of training iterations
 #systemsize_x = the size of the x-dimension of the square lattice
