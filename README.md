@@ -25,7 +25,7 @@ We plan to support more models and architectures in the future.
 For further questions or inquiries, please feel free to send an email to mohamed.hibat.allah@uwaterloo.ca. Future contributions would be really appreciated.
 
 ### Citation:
-If you would like to cite this work, you can use the bibtex work below:
+If you would like to cite this work, you can use the bibtex code below:
 ```bibtex
 @article{....,
   title = {Recurrent Neural Network Wavefunctions},
