@@ -228,3 +228,4 @@ def run_2DTFIM(numsteps = 2*10**4, systemsize_x = 5, systemsize_y = 5, Bx = +2, 
                 lr_ = lr*(1+it/5000)**(-1)
                 #Optimize
                 sess.run(optstep,feed_dict={Eloc:local_energies,samp:samples,learningrate_placeholder: lr_})
+    return meanEnergy, varEnergy
