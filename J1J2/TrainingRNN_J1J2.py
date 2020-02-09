@@ -289,8 +289,10 @@ def run_J1J2(numsteps = 10**5, systemsize = 20, J1_  = 1.0, J2_ = 0.0, num_units
                  #Saving the performances if the model is better
                  saver.save(sess,path+'/'+filename)
 
-              lr_ = 1/((1/lr)+(it/10)) #learning rate decay
-              sess.run(optstep,feed_dict={Eloc:local_energies,samp:samples,learningrate_placeholder: lr_})
+#               lr_ = 1/((1/lr)+(it/10)) #learning rate decay
+#               sess.run(optstep,feed_dict={Eloc:local_energies,samp:samples,learningrate_placeholder: lr_})
+               #without learning decay
+              sess.run(optstep,feed_dict={Eloc:local_energies,samp:samples,learningrate_placeholder: lr})
 
     return meanEnergy, varEnergy
  
