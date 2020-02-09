@@ -8,20 +8,12 @@ Our implementation is based on TensorFlow 1 and we plan to support TensorFlow 2 
 
 This repository contains the following folders:
 
-### 1DTFIM
-1D Positive Recurrent Neural Network Wavefunction for 1D Transverse-field Ising Model (TFIM).
-### 2DTFIM_1DRNN
-1D Positive Recurrent Neural Network Wavefunction for 2D TFIM.
-### 2DTFIM_2DRNN 
-2D Positive Recurrent Neural Network Wavefunction for 2D TFIM.
-### J1J2
-1D Complex Recurrent Neural Network Wavefunction for 1D J1-J2 Model.
-### Check_Points
-This folder is intended to save the parameters of the RNN wavefunction as well as the energies and the variances after training.
-### Tutorials 
-This folder contains jupyter notebooks that you can run on Google colaboratory (colab.research.google.com/) to test how RNN wavefunctions
-
-To run a VMC calculation for the task of finding the ground state energy of a certain model, it is enough to execute the python run file in a folder of interest.
+**1DTFIM**: 1D Positive Recurrent Neural Network (pRNN) Wavefunction for 1D Transverse-field Ising Model (TFIM).
+**2DTFIM_1DRNN**: 1D Positive Recurrent Neural Network Wavefunction for 2D TFIM.
+**2DTFIM_2DRNN**: 2D Positive Recurrent Neural Network Wavefunction for 2D TFIM.
+**J1J2**: 1D Complex Recurrent Neural Network (cRNN) Wavefunction for 1D J1-J2 Model.
+**Tutorials**: this folder contains jupyter notebooks that you can run on Google colaboratory (with a free GPU on colab.research.google.com/) to test pRNN wavefunctions on 1DTFIM and cRNN wavefunctions on 1D J1J2. These notebook will also help you to get a clearer idea about how to use the remaining code the previous folders for further inverstigations.
+**Check_Points**: this folder is intended to save the parameters of the RNN wavefunction as well as the energies and the variances after training.
 
 We plan to support more models and architectures in the future.
 
