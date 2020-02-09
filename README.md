@@ -10,9 +10,9 @@ This repository contains the following folders:
 
 ### 1DTFIM
 1D Positive Recurrent Neural Network Wavefunction for 1D Transverse-field Ising Model (TFIM).
-### 2DTFIM_1DRNN:
+### 2DTFIM_1DRNN
 1D Positive Recurrent Neural Network Wavefunction for 2D TFIM.
-### 2DTFIM_2DRNN: 
+### 2DTFIM_2DRNN 
 2D Positive Recurrent Neural Network Wavefunction for 2D TFIM.
 ### J1J2
 1D Complex Recurrent Neural Network Wavefunction for 1D J1-J2 Model.
