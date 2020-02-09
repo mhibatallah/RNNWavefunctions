@@ -18,7 +18,7 @@ This repository contains the following folders:
 
 * **Tutorials**: this folder contains jupyter notebooks that you can run on Google colaboratory (with a free GPU on colab.research.google.com/) to test pRNN wavefunctions on 1DTFIM and cRNN wavefunctions on 1D J1J2. These notebooks will also help you to get a clearer idea on how to use the remaining code in the previous folders for further investigations.
 
-* **Check_Points**: this folder is intended to save the parameters of the RNN wavefunction as well as the energies and the variances after training.
+* **Check_Points**: this folder is intended to contain the saved parameters of the RNN wavefunction as well as the energies and the variances after training.
 
 We plan to support more models and architectures in the future.
 
