@@ -193,11 +193,11 @@ def run_2DTFIM(numsteps = 2*10**4, systemsize_x = 5, systemsize_y = 5, Bx = +2, 
 
             for it in range(len(meanEnergy),numsteps+1):
 
-                print("sampling started")
-                start = time.time()
+#                 print("sampling started")
+#                 start = time.time()
                 samples=sess.run(samples_)
-                end = time.time()
-                print("sampling ended: "+ str(end - start))
+#                 end = time.time()
+#                 print("sampling ended: "+ str(end - start))
 
                 #Estimating local_energies
                 local_energies = Ising2D_local_energies(Jz, Bx, Nx, Ny, samples, queue_samples, log_probs_tensor, samples_placeholder, log_probs, sess)
@@ -209,12 +209,15 @@ def run_2DTFIM(numsteps = 2*10**4, systemsize_x = 5, systemsize_y = 5, Bx = +2, 
                 meanEnergy.append(meanE)
                 varEnergy.append(varE)
 
-                print('mean(E): {0}, var(E): {1}, #samples {2}, #Step {3} \n\n'.format(meanE,varE,numsamples, it))
-
+                if it%10==0:                
+                   print('mean(E): {0}, var(E): {1}, #samples {2}, #Step {3} \n\n'.format(meanE,varE,numsamples, it))
+              
+            #Comment if you dont want to save or if saving is not working
                 if it>=5000 and varE <= np.min(varEnergy): #5000 can be changed to suite your chosen number of iterations and to avoid slow down by saving the model too often during the initial phase of fast convergence
                   #Saving the performances if the model is better
                   saver.save(sess,path+'/'+filename)
 
+            #Comment if you dont want to save or if saving is not working
                 if it%10==0:
                   #Saving the performances
                   np.save('../Check_Points/2DTFIM/meanEnergy_2DVanillaRNN_'+str(Nx)+'x'+ str(Ny) +'_Bx'+str(Bx)+'_lradap'+str(lr)+'_samp'+str(numsamples)+ending  + savename +'.npy', meanEnergy)
