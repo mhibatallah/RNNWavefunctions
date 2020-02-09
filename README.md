@@ -29,6 +29,6 @@ If you would like to cite this work, you can use the bibtex code below:
 ```bibtex
 @article{....,
   title = {Recurrent Neural Network Wavefunctions},
-  author = {...},
+  author = {Mohamed Hibat-Allah, Martin Ganahl, Lauren E. Hayward, Roger G. Melko, Juan Carrasquilla},
 }
 ```
