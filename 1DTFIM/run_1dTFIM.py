@@ -1,4 +1,4 @@
-from Training_1DTFIM import run_1DTFIM
+from TrainingRNN_1DTFIM import run_1DTFIM
 
 #numsteps = number of training iterations
 #systemsize = number of physical spins
