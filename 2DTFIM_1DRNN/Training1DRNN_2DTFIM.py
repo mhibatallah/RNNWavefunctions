@@ -192,13 +192,13 @@ def run_2DTFIM(numsteps = 2*10**4, systemsize_x = 5, systemsize_y = 5, Bx = +2, 
 
             for it in range(len(meanEnergy),numsteps+1):
 
-                print("sampling started")
-                start = time.time()
+#                 print("sampling started")
+#                 start = time.time()
 
                 samples=sess.run(samples_)
 
-                end = time.time()
-                print("sampling ended: "+ str(end - start))
+#                 end = time.time()
+#                 print("sampling ended: "+ str(end - start))
 
                 #Estimating local_energies
                 local_energies = Ising2D_local_energies(Jz, Bx, Nx, Ny, samples, queue_samples, log_probs_tensor, samples_placeholder, log_probs, sess)
