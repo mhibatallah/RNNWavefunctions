@@ -14,7 +14,7 @@ This repository contains the following folders:
 
 * **2DTFIM_2DRNN**: 2D Positive Recurrent Neural Network Wavefunction for 2D TFIM.
 
-* **J1J2**: 1D Complex Recurrent Neural Network (cRNN) Wavefunction for 1D J1-J2 Model.
+* **J1J2**: 1D Complex Recurrent Neural Network (cRNN) Wavefunction (with a built-in U(1) symmetry to impose a zero magnetization) for 1D J1-J2 Model.
 
 * **Tutorials**: this folder contains jupyter notebooks that you can run on Google colaboratory (with a free GPU on colab.research.google.com/) to test pRNN wavefunctions on 1DTFIM and cRNN wavefunctions on 1D J1J2, and to compare with exact diagonalization for small system sizes. These notebooks will also help you to get a clearer idea on how to use the remaining code in the previous folders for further investigations.
 
