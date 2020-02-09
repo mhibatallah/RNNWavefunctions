@@ -6,4 +6,4 @@ from TrainingRNN_J1J2 import run_J1J2
 #numsamples = number of samples used for training
 #num_units = number of memory units of the hidden state of the RNN
 #num_layers = number of vertically stacked RNN cells
-run_J1J2(numsteps = 5*10**3, systemsize = 20, J1_  = 1.0, J2_ = 0.0, num_units = 50, num_layers = 1, numsamples = 500, learningrate = 2.5*1e-3, seed = 111)
+meanEnergy, varEnergy = run_J1J2(numsteps = 5*10**3, systemsize = 20, J1_  = 1.0, J2_ = 0.0, num_units = 50, num_layers = 1, numsamples = 500, learningrate = 2.5*1e-3, seed = 111)
