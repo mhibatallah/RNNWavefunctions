@@ -47,7 +47,7 @@ class RNNwavefunction(object):
                              the samples in integer encoding
         """
 
-        with self.graph.as_default(): #Call the default graph, used if willing to create multiple graphs.
+        with self.graph.as_default(): #Call the default graph, used if not willing to create multiple graphs.
             with tf.variable_scope(self.scope,reuse=tf.AUTO_REUSE):
 
                 #Initial input to feed to the 2drnn
