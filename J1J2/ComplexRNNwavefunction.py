@@ -56,7 +56,7 @@ class RNNwavefunction(object):
             samples:         tf.Tensor of shape (numsamples,systemsize)
                              the samples in integer encoding
         """
-        with self.graph.as_default(): #Call the default graph, used if willing to create multiple graphs.
+        with self.graph.as_default(): #Call the default graph, used if not willing to create multiple graphs.
             with tf.variable_scope(self.scope,reuse=tf.AUTO_REUSE):
 
                 a=tf.zeros(numsamples, dtype=tf.float32)
