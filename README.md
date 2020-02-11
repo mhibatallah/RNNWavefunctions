@@ -22,7 +22,7 @@ This repository contains the following folders:
 
 We plan to support more models and architectures in the future.
 
-To learn more about this new approach, you can check our paper on arxiv: https://arxiv.org/abs/2002.02973
+To learn more about this new approach, you can check out our paper on arxiv: https://arxiv.org/abs/2002.02973
 
 For further questions or inquiries, please feel free to send an email to mohamed.hibat.allah@uwaterloo.ca. Future contributions would be really appreciated.
 
