@@ -38,3 +38,8 @@ If you would like to cite this work, you can use the bibtex code below:
     primaryClass={cond-mat.dis-nn}
 }
 ```
+
+## LICENSE
+GNU General Public License v3.0 or later
+
+See the [`COPYING`](./COPYING) file to see the full text.
