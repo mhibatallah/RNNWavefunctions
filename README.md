@@ -8,13 +8,13 @@ Our implementation is based on TensorFlow 1 and we plan to support TensorFlow 2 
 
 This repository contains the following folders:
 
-* **1DTFIM**: 1D Positive Recurrent Neural Network (pRNN) Wave Function for 1D Transverse-field Ferromagnetic Ising Model (TFIM).
+* **1DTFIM**: an implementation of the 1D Positive Recurrent Neural Network (pRNN) Wave Function for the purpose of finding the ground state of the 1D Transverse-field Ferromagnetic Ising Model (TFIM).
 
-* **2DTFIM_1DRNN**: 1D Positive Recurrent Neural Network Wave Function for 2D TFIM.
+* **2DTFIM_1DRNN**: an implementation of the 1D Positive Recurrent Neural Network Wave Function for the goal of finding the ground state of the 2D TFIM.
 
-* **2DTFIM_2DRNN**: 2D Positive Recurrent Neural Network Wave Function for 2D TFIM.
+* **2DTFIM_2DRNN**: an implementation of the 2D Positive Recurrent Neural Network Wave Function for the purpose of finding the ground state of the 2D TFIM.
 
-* **J1J2**: 1D Complex Recurrent Neural Network (cRNN) Wave Function (with a built-in U(1) symmetry to impose a zero magnetization) for 1D J1-J2 Model.
+* **J1J2**: an implementation of the 1D Complex Recurrent Neural Network (cRNN) Wave Function for 1D J1-J2 Model, with a built-in U(1) symmetry to impose a zero magnetization as explained in the Appendix of our paper.
 
 * **Tutorials**: this folder contains jupyter notebooks that you can run on <a href="http://colab.research.google.com" target="_blank">Google Colaboratory</a> (with a free GPU!) to test pRNN wave functions on 1DTFIM and cRNN wave functions on 1D J1J2, and to compare with exact diagonalization for small system sizes. These notebooks will also help you to get a clearer idea on how to use the remaining code in the previous folders for further investigations.
 
