@@ -14,7 +14,7 @@ This repository contains the following folders:
 
 * **2DTFIM_2DRNN**: an implementation of the 2D Positive Recurrent Neural Network Wave Function for the purpose of finding the ground state of the 2D TFIM.
 
-* **J1J2**: an implementation of the 1D Complex Recurrent Neural Network (cRNN) Wave Function for 1D J1-J2 Model, with a built-in U(1) symmetry to impose a zero magnetization as explained in the Appendix of our paper.
+* **J1J2**: an implementation of the 1D Complex Recurrent Neural Network (cRNN) Wave Function to estimate the ground state of the 1D J1-J2 model, with a built-in U(1) symmetry to impose a zero magnetization as explained in the Appendix of our paper.
 
 * **Tutorials**: this folder contains jupyter notebooks that you can run on <a href="http://colab.research.google.com" target="_blank">Google Colaboratory</a> (with a free GPU!) to test pRNN wave functions on 1DTFIM and cRNN wave functions on 1D J1J2, and to compare with exact diagonalization for small system sizes. These notebooks will also help you to get a clearer idea on how to use the remaining code in the previous folders for further investigations.
 
