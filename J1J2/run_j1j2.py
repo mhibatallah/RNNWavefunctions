@@ -3,7 +3,7 @@ from TrainingRNN_J1J2 import run_J1J2
 #numsteps = number of training iterations
 #systemsize = the number of physical spins
 #J1_, J2_ = the coupling parameters of the J1-J2 Hamiltonian
-#Marshall_sign: True = A marshall sign is applied on top of the cRNN wavefunction, False = no prior is applied
+#Marshall_sign: True = A marshall sign is applied on top of the cRNN wavefunction, False = no prior sign is applied
 #numsamples = number of samples used for training
 #num_units = number of memory units of the hidden state of the RNN
 #num_layers = number of vertically stacked RNN cells
