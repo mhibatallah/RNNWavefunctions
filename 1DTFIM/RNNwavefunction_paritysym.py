@@ -119,7 +119,7 @@ class RNNwavefunction(object):
 
             log_probs1=tf.reduce_sum(tf.log(tf.reduce_sum(tf.multiply(probs,one_hot_samples),axis=2)),axis=1)
 
-            #Reverse all the spin configurations to impose the parity symmetry---------------------------
+            #Reverse all the spin configurations from left to right and vice-versa to impose the parity symmetry---------------------------
             samples_rev = samples[:,::-1]
 
             inputs=tf.stack([a,b], axis = 1)
