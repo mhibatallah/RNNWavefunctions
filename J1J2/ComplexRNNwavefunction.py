@@ -21,6 +21,7 @@ class RNNwavefunction(object):
                          number of units per RNN layer
             scope:       str
                          the name of the name-space scope
+            seed:       pseudo-random number generator
         """
         self.graph=tf.Graph()
         self.scope=scope #Label of the RNN wavefunction
