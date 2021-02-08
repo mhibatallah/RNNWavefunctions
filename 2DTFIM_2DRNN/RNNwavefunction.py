@@ -5,17 +5,20 @@ import random
 class RNNwavefunction(object):
     def __init__(self,systemsize_x, systemsize_y,cell=None,units=[10],scope='RNNwavefunction',seed = 111):
         """
-            systemsize:  int
-                         number of sites
+            systemsize_x:  int
+                         number of sites for x-axis
+            systemsize_y:  int
+                         number of sites for y-axis         
             cell:        a tensorflow RNN cell
             units:       list of int
                          number of units per RNN layer
             scope:       str
                          the name of the name-space scope
+            seed:        pseudo-random number initialization 
         """
         self.graph=tf.Graph()
         self.scope=scope #Label of the RNN wavefunction
-        self.Nx=systemsize_x #number of sites in the 2d model
+        self.Nx=systemsize_x #size of x direction in the 2d model
         self.Ny=systemsize_y
 
         random.seed(seed)  # `python` built-in pseudo-random generator
@@ -36,7 +39,10 @@ class RNNwavefunction(object):
             Parameters:
 
             numsamples:      int
-                             number of samples to be produced
+                             
+                             
+                             
+                             samples to be produced
             inputdim:        int
                              hilbert space dimension of one spin
 
@@ -61,7 +67,7 @@ class RNNwavefunction(object):
                 rnn_states = {}
                 inputs = {}
 
-                for ny in range(self.Ny): #Loop over the number of sites
+                for ny in range(self.Ny): #Loop over the boundary
                     if ny%2==0:
                         nx = -1
                         # print(nx,ny)
@@ -75,13 +81,13 @@ class RNNwavefunction(object):
                         inputs[str(nx)+str(ny)] = tf.zeros((self.numsamples,inputdim), dtype = tf.float64) 
 
 
-                for nx in range(self.Nx): #Loop over the number of sites
+                for nx in range(self.Nx): #Loop over the boundary
                     ny = -1
                     rnn_states[str(nx)+str(ny)]=self.rnn.zero_state(self.numsamples,dtype=tf.float64)
                     inputs[str(nx)+str(ny)] = tf.zeros((self.numsamples,inputdim), dtype = tf.float64) 
 
-
-                for ny in range(self.Ny): #Loop over the diagonal
+                #Begin sampling
+                for ny in range(self.Ny): 
 
                     if ny%2 == 0:
 
@@ -140,7 +146,7 @@ class RNNwavefunction(object):
             rnn_states = {}
             inputs = {}
 
-            for ny in range(self.Ny): #Loop over the number of sites
+            for ny in range(self.Ny): #Loop over the boundary
                 if ny%2==0:
                     nx = -1
                     rnn_states[str(nx)+str(ny)]=self.rnn.zero_state(self.numsamples,dtype=tf.float64)
@@ -152,7 +158,7 @@ class RNNwavefunction(object):
                     inputs[str(nx)+str(ny)] = tf.zeros((self.numsamples,inputdim), dtype = tf.float64) 
 
 
-            for nx in range(self.Nx): #Loop over the number of sites
+            for nx in range(self.Nx): #Loop over the boundary
                 ny = -1
                 rnn_states[str(nx)+str(ny)]=self.rnn.zero_state(self.numsamples,dtype=tf.float64)
                 inputs[str(nx)+str(ny)] = tf.zeros((self.numsamples,inputdim), dtype = tf.float64) 
@@ -161,7 +167,8 @@ class RNNwavefunction(object):
             with tf.variable_scope(self.scope,reuse=tf.AUTO_REUSE):
                 probs = [[[] for nx in range(self.Nx)] for ny in range(self.Ny)]
 
-                for ny in range(self.Ny): #Loop over the diagonal
+                #Begin estimation of log probs
+                for ny in range(self.Ny):
 
                     if ny%2 == 0:
 
