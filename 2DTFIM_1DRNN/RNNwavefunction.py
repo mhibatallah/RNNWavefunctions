@@ -7,7 +7,20 @@ import random
 
 class RNNwavefunction(object):
     def __init__(self,systemsize_x, systemsize_y,cell=tf.contrib.rnn.LSTMCell,activation=tf.nn.relu,units=[10],scope='RNNwavefunction',seed = 111):
-
+        """
+            systemsize_x:  int
+                         number of sites for x-axis
+            systemsize_y:  int
+                         number of sites for y-axis         
+            cell:        a tensorflow RNN cell
+            activation:  activation function used for the RNN cell
+            units:       list of int
+                         number of units per RNN layer
+            scope:       str
+                         the name of the name-space scope
+            seed:        pseudo-random number generator 
+        """
+        
         self.graph=tf.Graph()
         self.scope=scope #Label of the RNN wavefunction
         self.Nx=systemsize_x #x_size of the lattice
