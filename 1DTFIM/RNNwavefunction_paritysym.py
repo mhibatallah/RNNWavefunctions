@@ -5,7 +5,7 @@ import numpy as np
 import random
 
 class RNNwavefunction(object):
-    def __init__(self,systemsize,cell=None,activation=tf.nn.relu,units=[10],scope='RNNwavefunction', seed = 111): 
+    def __init__(self,systemsize,cell=None,units=[10],scope='RNNwavefunction', seed = 111): 
         """
             systemsize:  int
                          number of sites      
