@@ -1,6 +1,6 @@
 # Recurrent Neural Network Wave Functions
 
-RNN wave functions are efficient quantum many-body wave function ansätzes based on Recurrent Neural Networks. These wave functions can be used to find the ground state of a quantum many-body Hamiltonian using Variational Monte Carlo (VMC). <a href="https://journals.aps.org/prresearch/abstract/10.1103/PhysRevResearch.2.023358" target="_blank">In our paper</a>, we show that this novel architecture can provide accurate estimations of ground state energies, correlation functions as well as entanglement entropies.
+RNN wave functions are efficient quantum many-body wave function ansätzes based on Recurrent Neural Networks. These wave functions can be used to find the ground state of a quantum many-body Hamiltonian using Variational Monte Carlo (VMC). <a href="https://journals.aps.org/prresearch/abstract/10.1103/PhysRevResearch.2.023358" target="_blank">In our paper</a>, we show that this architecture can provide accurate estimations of ground state energies, correlation functions as well as entanglement entropies.
 
 Our implementation is based on TensorFlow 1.
 
