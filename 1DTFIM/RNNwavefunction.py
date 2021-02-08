@@ -5,14 +5,16 @@ import numpy as np
 import random
 
 class RNNwavefunction(object):
-    def __init__(self,systemsize,cell=tf.contrib.cudnn_rnn.CudnnCompatibleGRUCell,activation=tf.nn.relu,units=[10],scope='RNNwavefunction', seed = 111):
+    def __init__(self,systemsize,cell=tf.contrib.cudnn_rnn.CudnnCompatibleGRUCell,units=[10],scope='RNNwavefunction', seed = 111):
         """
-            systemsize:  int, size of the lattice
+            systemsize:  int
+                         number of sites      
             cell:        a tensorflow RNN cell
             units:       list of int
                          number of units per RNN layer
             scope:       str
                          the name of the name-space scope
+            seed:        pseudo-random number generator 
         """
         
         self.graph=tf.Graph()
