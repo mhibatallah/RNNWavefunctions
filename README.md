@@ -20,8 +20,6 @@ This repository contains the following folders:
 
 * **Check_Points**: this folder is intended to contain the saved parameters of the RNN wave function as well as the energies and the variances after training.
 
-We plan to support more models and architectures in the future.
-
 To learn more about this new approach, you can check out our paper on Physical Review Research: https://journals.aps.org/prresearch/abstract/10.1103/PhysRevResearch.2.023358
 
 For further questions or inquiries, please feel free to send an email to mohamed.hibat.allah@uwaterloo.ca. Future contributions would be really appreciated.
