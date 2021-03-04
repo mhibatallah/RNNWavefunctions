@@ -4,7 +4,7 @@ RNN wave functions are efficient quantum many-body wave function ansätzes based
 
 Our implementation is based on TensorFlow 1.
 
-This code is adapted from https://github.com/mganahl/Recurrent_NN_VMC
+This code is adapted from [Martin Ganahl's code](https://github.com/mganahl/Recurrent_NN_VMC)
 
 ## Running Variational Monte Carlo (VMC) Calculations
 
