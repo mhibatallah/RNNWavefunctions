@@ -4,11 +4,10 @@ RNN wave functions are efficient quantum many-body wave function ansätzes based
 
 This code is an adaptation of [Martin Ganahl's code](https://github.com/mganahl/Recurrent_NN_VMC)
 
-## Dependency
-Our implementation is based on TensorFlow 1.
+## Dependencies
+Our implementation works on Python (3.6.10) with TensorFlow (1.13.1) and NumPy (1.16.3) modules.
 
 ## Content
-
 This repository contains the following folders:
 
 * **1DTFIM**: an implementation of the 1D Positive Recurrent Neural Network (pRNN) Wave Function for the purpose of finding the ground state of the 1D Transverse-field Ferromagnetic Ising Model (TFIM).
