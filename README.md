@@ -26,6 +26,9 @@ To learn more about this new approach, you can check out our paper on Physical R
 
 For further questions or inquiries, please feel free to send an email to mohamed.hibat.allah@uwaterloo.ca. Future contributions would be really appreciated.
 
+## License
+This code is licensed under the [Do No Harm](https://github.com/raisely/NoHarm) license and can be used for academic research that will be beneficial to humanity.
+
 ## Citing:
 ```bibtex
 @article{PhysRevResearch.2.023358,
