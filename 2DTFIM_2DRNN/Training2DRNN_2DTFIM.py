@@ -165,7 +165,7 @@ def run_2DTFIM(numsteps = 2*10**4, systemsize_x = 5, systemsize_y = 5, Bx = +2, 
             gradients, variables = zip(*optimizer.compute_gradients(cost))
 
             optstep=optimizer.apply_gradients(zip(gradients,variables),global_step=global_step)
-            sess.run(tf.variables_initializer(optimizer.variables()),feed_dict={learning_rate_withexpdecay: lr})
+            sess.run(tf.variables_initializer(optimizer.variables()))
 
             saver=tf.train.Saver() #define tf saver
 
