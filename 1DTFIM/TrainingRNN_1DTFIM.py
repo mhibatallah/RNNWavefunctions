@@ -214,7 +214,7 @@ def run_1DTFIM(numsteps = 10**4, systemsize = 20, num_units = 50, Bx = 1, num_la
 
              #Comment if you don't want to save
               if it%500==0: 
-                  #Saving the performances if the model is better
+                  #Saving the model
                   saver.save(sess,path+'/'+filename)
 
               sess.run(optstep,feed_dict={Eloc:local_energies,samp:samples,learningrate_placeholder: lr})
