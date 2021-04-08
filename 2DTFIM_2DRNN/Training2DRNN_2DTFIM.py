@@ -94,7 +94,10 @@ def run_2DTFIM(numsteps = 2*10**4, systemsize_x = 5, systemsize_y = 5, Bx = +2, 
 
     # Intitializing the RNN-----------
     units=[num_units] #list containing the number of hidden units for each layer of the networks (We only support one layer for the moment)
-     
+
+    Jz = +np.ones((Nx,Ny)) #Ferromagnetic couplings
+    lr=np.float64(learningrate)
+
     Nx=systemsize_x #x dim
     Ny=systemsize_y #y dim
 
@@ -145,9 +148,6 @@ def run_2DTFIM(numsteps = 2*10**4, systemsize_x = 5, systemsize_y = 5, Bx = +2, 
     print('Training with numsamples = ', numsamples)
     print('\n')
 
-    Jz = +np.ones((Nx,Ny))
-
-    lr=np.float64(learningrate)
     ending='units'
     for u in units:
         ending+='_{0}'.format(u)
