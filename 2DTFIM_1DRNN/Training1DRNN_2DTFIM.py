@@ -215,7 +215,7 @@ def run_2DTFIM(numsteps = 2*10**4, systemsize_x = 5, systemsize_y = 5, Bx = +2, 
                 
                 #Comment if you don't want to save if saving gives you errors
                 if it%500==0:
-                    #Saving the performances if the model is better
+                    #Saving the model
                     saver.save(sess,path+'/'+filename)
                 
                 #Comment if you don't want to save if saving gives you errors
