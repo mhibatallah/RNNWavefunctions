@@ -95,6 +95,9 @@ def run_2DTFIM(numsteps = 2*10**4, systemsize_x = 5, systemsize_y = 5, Bx = +2, 
     Nx=systemsize_x #x dim
     Ny=systemsize_y #y dim
 
+    Jz = +np.ones((Nx,Ny)) #Ferromagnetic couplings
+    lr=np.float64(learningrate)
+    
     input_dim=2 #Dimension of the Hilbert space for each site (here = 2, up or down)
     numsamples_=20 #only for initialization; later I'll use a much larger value (see below)
 
@@ -129,10 +132,6 @@ def run_2DTFIM(numsteps = 2*10**4, systemsize_x = 5, systemsize_y = 5, Bx = +2, 
 
     print('Training with numsamples = ', numsamples)
     print('\n')
-
-    Jz = +np.ones((Nx,Ny)) #Ferromagnetic couplings
-
-    lr=np.float64(learningrate)
 
     ending='units'
     for u in units:
