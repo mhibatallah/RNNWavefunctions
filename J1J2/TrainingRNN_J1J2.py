@@ -4,6 +4,7 @@ import numpy as np
 import os
 import time
 import random
+from math import ceil
 
 from ComplexRNNwavefunction import RNNwavefunction
 
@@ -63,8 +64,7 @@ def J1J2MatrixElements(J1,J2,Bz,sigmap, sigmaH, matrixelements, periodic = False
               sig=np.copy(sigmap)
               sig[site]=sig[(site+1)%N] #Make the two neighbouring spins equal.
               sig[(site+1)%N]=sigmap[site]
-
-              sigmaH[num] = sig #The last fours lines are meant to flip the two neighbouring spins (that the effect of applying J+ and J-)
+              sigmaH[num] = sig #The last three lines are meant to flip the two neighbouring spins (that the effect of applying J+ and J-)
 
               if Marshall_sign:
                   matrixelements[num] = -J1[site]/2
@@ -77,10 +77,9 @@ def J1J2MatrixElements(J1,J2,Bz,sigmap, sigmaH, matrixelements, periodic = False
       if J2[site] != 0.0:
         if sigmap[site]!=sigmap[(site+2)%N]:
             sig=np.copy(sigmap)
-            sig[site]=sig[(site+2)%N] #Make the two neighbouring spins equal.
+            sig[site]=sig[(site+2)%N] #Make the two next-neighbouring spins equal.
             sig[(site+2)%N]=sigmap[site]
-
-            sigmaH[num] = sig #The last fours lines are meant to flip the two neighbouring spins (that the effect of applying J+ and J-)
+            sigmaH[num] = sig #The last three lines are meant to flip the two next-neighbouring spins (that the effect of applying J+ and J-)
             matrixelements[num] = +J2[site]/2
 
             num += 1
@@ -251,7 +250,7 @@ def run_J1J2(numsteps = 10**5, systemsize = 20, J1_  = 1.0, J2_ = 0.0, Marshall_
               #Process in steps to get log amplitudes
               # print("Generating log amplitudes Started")
               start = time.time()
-              steps = len_sigmas//30000+1 #Process the sigmas in steps to avoid allocating too much memory
+              steps = ceil(len_sigmas//30000) #Process the sigmas in steps to avoid allocating too much memory
 
               # print("number of required steps :" + str(steps))
 
@@ -288,7 +287,7 @@ def run_J1J2(numsteps = 10**5, systemsize = 20, J1_  = 1.0, J2_ = 0.0, Marshall_
                  np.save('../Check_Points/J1J2/varEnergy_N'+str(N)+'_samp'+str(numsamples)+'_lradap'+str(lr)+'_complexGRURNN'+ savename + ending +'_zeromag.npy',varEnergy)
 
               #Comment if you dont want to save or if saving is not working
-              if it>=500 and varE <= np.min(varEnergy[100:]): #500 can be changed to suite your chosen number of iterations and to avoid slow down by saving the model too often during the initial phase of fast convergence, we also do varEnergy[100:] to skip the initial local minima where variance is small
+              if it%500==0: #500 can be changed to suite your chosen number of iterations and to avoid slow down by saving the model too often during the initial phase of fast convergence.
                  #Saving the performances if the model is better
                  saver.save(sess,path+'/'+filename)
 
