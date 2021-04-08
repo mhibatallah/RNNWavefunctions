@@ -54,7 +54,7 @@ def Ising_local_energies(Jz, Bx, samples, queue_samples, log_probs_tensor, sampl
     # start = time.time()
 
     len_sigmas = (N+1)*numsamples
-    steps = len_sigmas//25000+1 #I want a maximum of 25000 in batch size just to not allocate too much memory
+    steps = ceil(len_sigmas//25000) #Get a maximum of 25000 configurations in batch size just to not allocate too much memory
 
     queue_samples_reshaped = np.reshape(queue_samples, [(N+1)*numsamples, N])
     for i in range(steps):
