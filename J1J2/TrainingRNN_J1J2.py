@@ -288,7 +288,7 @@ def run_J1J2(numsteps = 10**5, systemsize = 20, J1_  = 1.0, J2_ = 0.0, Marshall_
 
               #Comment if you dont want to save or if saving is not working
               if it%500==0: #500 can be changed to suite your chosen number of iterations and to avoid slow down by saving the model too often.
-                 #Saving the performances if the model is better
+                 #Saving the model
                  saver.save(sess,path+'/'+filename)
 
 #               ## with learning rate decay
