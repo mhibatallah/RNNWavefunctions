@@ -4,6 +4,7 @@ import numpy as np
 import os
 import time
 import random
+from math import ceil
 
 from RNNwavefunction import RNNwavefunction
 from MDRNNcell import MDRNNcell
@@ -63,8 +64,8 @@ def Ising2D_local_energies(Jz, Bx, Nx, Ny, samples, queue_samples, log_probs_ten
     #Do it in steps
 
     len_sigmas = (N+1)*numsamples
-    steps = len_sigmas//20000+1 #I want a maximum of 25000 in batch size just to not allocate too much memory
-    # print("Total num of steps =", steps)
+    steps = ceil(len_sigmas//25000) #Get a maximum of 25000 configurations in batch size to not allocate too much memory
+
     queue_samples_reshaped = np.reshape(queue_samples, [(N+1)*numsamples, Nx,Ny])
     for i in range(steps):
       if i < steps-1:
