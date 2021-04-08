@@ -95,11 +95,13 @@ def run_2DTFIM(numsteps = 2*10**4, systemsize_x = 5, systemsize_y = 5, Bx = +2, 
     # Intitializing the RNN-----------
     units=[num_units] #list containing the number of hidden units for each layer of the networks (We only support one layer for the moment)
 
+    numsamples = num_samples #number of samples used for training
+     
     Nx=systemsize_x #x dim
     Ny=systemsize_y #y dim
 
     input_dim=2 #Dimension of the Hilbert space for each site (here = 2, up or down)
-    numsamples_=20 #only for initialization; later I'll use a much larger value (see below)
+    numsamples_=20 #number of samples only for initialization
     wf=RNNwavefunction(Nx,Ny,units=units,cell=MDRNNcell,seed = seed) #contains the graph with the RNNs
 
     sampling=wf.sample(numsamples_,input_dim) #call this function once to create the dense layers
@@ -140,8 +142,6 @@ def run_2DTFIM(numsteps = 2*10**4, systemsize_x = 5, systemsize_y = 5, Bx = +2, 
     varEnergy=[]
 
     #Running the training -------------------
-    numsamples = 500
-    numsteps = 150000
     path=os.getcwd()
 
     print('Training with numsamples = ', numsamples)
