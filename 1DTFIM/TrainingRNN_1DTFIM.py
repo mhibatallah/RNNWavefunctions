@@ -161,7 +161,7 @@ def run_1DTFIM(numsteps = 10**4, systemsize = 20, num_units = 50, Bx = 1, num_la
             #End calculate Gradients---------------
 
             optstep=optimizer.apply_gradients(zip(gradients,variables), global_step = global_step)
-            sess.run(tf.variables_initializer(optimizer.variables()),feed_dict={learningrate_placeholder: lr})
+            sess.run(tf.variables_initializer(optimizer.variables()))
             saver=tf.train.Saver()
     #----------------------------------------------------------------
 
