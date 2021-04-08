@@ -213,8 +213,8 @@ def run_2DTFIM(numsteps = 2*10**4, systemsize_x = 5, systemsize_y = 5, Bx = +2, 
                    print('mean(E): {0}, var(E): {1}, #samples {2}, #Step {3} \n\n'.format(meanE,varE,numsamples, it))
               
             #Comment if you dont want to save or if saving is not working
-                if it>=5000 and varE <= np.min(varEnergy): #5000 can be changed to suite your chosen number of iterations and to avoid slow down by saving the model too often during the initial phase of fast convergence
-                  #Saving the performances if the model is better
+                if it%500==0: #500 can be changed to suite your chosen number of iterations and to avoid slow down by saving the model too often
+                  #Saving the model
                   saver.save(sess,path+'/'+filename)
 
             #Comment if you dont want to save or if saving is not working
@@ -224,7 +224,7 @@ def run_2DTFIM(numsteps = 2*10**4, systemsize_x = 5, systemsize_y = 5, Bx = +2, 
                   np.save('../Check_Points/2DTFIM/varEnergy_2DVanillaRNN_'+str(Nx)+'x'+ str(Ny) +'_Bx'+str(Bx)+'_lradap'+str(lr)+'_samp'+str(numsamples)+ending + savename +'.npy', varEnergy)
 
                 #lr_adaptation
-                lr_ = lr*(1+it/5000)**(-1)
+                lr_adapted = lr*(1+it/5000)**(-1)
                 #Optimize
-                sess.run(optstep,feed_dict={Eloc:local_energies,samp:samples,learningrate_placeholder: lr_})
+                sess.run(optstep,feed_dict={Eloc:local_energies,samp:samples,learningrate_placeholder: lr_adapted})
     return meanEnergy, varEnergy
