@@ -84,7 +84,7 @@ def Ising2D_local_energies(Jz, Bx, Nx, Ny, samples, queue_samples, log_probs_ten
 
 
 # ---------------- Running VMC with 2DRNNs -------------------------------------
-def run_2DTFIM(numsteps = 2*10**4, systemsize_x = 5, systemsize_y = 5, Bx = +2, num_units = 50, num_samples = 500, learningrate = 5e-3, seed = 111):
+def run_2DTFIM(numsteps = 2*10**4, systemsize_x = 5, systemsize_y = 5, Bx = +2, num_units = 50, numsamples = 500, learningrate = 5e-3, seed = 111):
 
     #Seeding
     tf.reset_default_graph()
@@ -94,8 +94,6 @@ def run_2DTFIM(numsteps = 2*10**4, systemsize_x = 5, systemsize_y = 5, Bx = +2, 
 
     # Intitializing the RNN-----------
     units=[num_units] #list containing the number of hidden units for each layer of the networks (We only support one layer for the moment)
-
-    numsamples = num_samples #number of samples used for training
      
     Nx=systemsize_x #x dim
     Ny=systemsize_y #y dim
