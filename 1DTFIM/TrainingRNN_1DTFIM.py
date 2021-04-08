@@ -4,6 +4,7 @@ import numpy as np
 import os
 import time
 import random
+from math import ceil
 
 from RNNwavefunction import RNNwavefunction
 # from RNNwavefunction_paritysym import RNNwavefunction #To use an RNN that has a parity symmetry so that the RNN is not biased by autoregressive sampling from left to right (but you need to comment the previous line)
@@ -212,7 +213,7 @@ def run_1DTFIM(numsteps = 10**4, systemsize = 20, num_units = 50, Bx = 1, num_la
                   print('mean(E): {0}, var(E): {1}, #samples {2}, #Step {3} \n\n'.format(meanE,varE,numsamples, it))
 
              #Comment if you don't want to save
-              if it>=100 and varE <= np.min(varEnergy): #We do it>100 to start saving the model after we get close to convergence to avoid slowing down due to too many saves initially
+              if it%500==0: 
                   #Saving the performances if the model is better
                   saver.save(sess,path+'/'+filename)
 
