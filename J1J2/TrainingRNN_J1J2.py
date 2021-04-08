@@ -99,6 +99,7 @@ def J1J2Slices(J1, J2, Bz, sigmasp, sigmas, H, sigmaH, matrixelements, Marshall_
     H: an array to store the diagonal and the diagonal matrix elements after applying the Hamiltonian on all the samples sigmasp.
     sigmaH: an array to store the diagonal and the diagonal configurations after applying the Hamiltonian on a single sample.
     matrixelements: an array where to store the matrix elements after applying the Hamiltonian on sigmap on a single sample.
+    Marshall_sign: bool, indicate if the Marshall sign is applied or not.    
     ----------------------------------------------------------------------------
     """
 
@@ -124,7 +125,11 @@ def run_J1J2(numsteps = 10**5, systemsize = 20, J1_  = 1.0, J2_ = 0.0, Marshall_
 
     N=systemsize #Number of spins
     lr = np.float64(learningrate)
-
+    
+    J1=+J1_*np.ones(N) # nearest neighbours couplings
+    J2=+J2_*np.ones(N) # next-nearest neighbours couplings
+    Bz=+0.0*np.ones(N) # magnetic field along z
+    
     #Seeding
     tf.reset_default_graph()
     random.seed(seed)  # `python` built-in pseudo-random generator
@@ -166,11 +171,6 @@ def run_J1J2(numsteps = 10**5, systemsize = 20, J1_  = 1.0, J2_ = 0.0, Marshall_
     #Running the training -------------------
 
     path=os.getcwd()
-
-    J1=+J1_*np.ones(N)
-    J2=+J2_*np.ones(N)
-
-    Bz=+0.0*np.ones(N)
 
     ending='_units'
     for u in units:
@@ -291,9 +291,11 @@ def run_J1J2(numsteps = 10**5, systemsize = 20, J1_  = 1.0, J2_ = 0.0, Marshall_
                  #Saving the performances if the model is better
                  saver.save(sess,path+'/'+filename)
 
+#               ## with learning rate decay
 #               lr_decayed = 1/((1/lr)+(it/10)) #learning rate decay
 #               sess.run(optstep,feed_dict={Eloc:local_energies,samp:samples,learningrate_placeholder: lr_decayed})
-               #without learning decay
+             
+              #without learning decay
               sess.run(optstep,feed_dict={Eloc:local_energies,samp:samples,learningrate_placeholder: lr})
 
     return meanEnergy, varEnergy
