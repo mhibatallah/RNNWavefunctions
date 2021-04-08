@@ -225,8 +225,8 @@ def run_2DTFIM(numsteps = 2*10**4, systemsize_x = 5, systemsize_y = 5, Bx = +2, 
                   np.save('../Check_Points/2DTFIM/varEnergy_GRURNN_'+str(Nx)+'x'+ str(Ny) +'_Bx'+str(Bx)+'_lradap'+str(lr)+'_samp'+str(numsamples)+ending + savename +'.npy', varEnergy)
 
                 #lr decay
-                lr_ = 1/((1/lr)+(it/10))
+                lr_decayed = 1/((1/lr)+(it/10))
                 #Optimization step
-                sess.run(optstep,feed_dict={Eloc:local_energies,samp:samples,learningrate_placeholder: lr_})
+                sess.run(optstep,feed_dict={Eloc:local_energies,samp:samples,learningrate_placeholder: lr_decayed})
 
     return meanEnergy, varEnergy
