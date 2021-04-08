@@ -4,6 +4,7 @@ import numpy as np
 import os
 import time
 import random
+from math import ceil
 
 from RNNwavefunction import RNNwavefunction
 
@@ -62,7 +63,7 @@ def Ising2D_local_energies(Jz, Bx, Nx, Ny, samples, queue_samples, log_probs_ten
     #Do it in steps
 
     len_sigmas = (N+1)*numsamples
-    steps = len_sigmas//25000+1 #I want a maximum of 25000 in batch size just to not allocate too much memory
+    steps = ceil(len_sigmas//25000) #Get a maximum of 25000 configurations in batch size just to not allocate too much memory
 
     queue_samples_reshaped = np.reshape(queue_samples, [(N+1)*numsamples, N])
     for i in range(steps):
@@ -214,7 +215,7 @@ def run_2DTFIM(numsteps = 2*10**4, systemsize_x = 5, systemsize_y = 5, Bx = +2, 
                     print('mean(E): {0}, var(E): {1}, #samples {2}, #Step {3} \n\n'.format(meanE,varE,numsamples, it))
                 
                 #Comment if you don't want to save if saving gives you errors
-                if it>=1000 and varE <= np.min(varEnergy): #We do it>100 to start saving the model after we get close to convergence to avoid slowing down due to too many saves initially
+                if it%500==0:
                     #Saving the performances if the model is better
                     saver.save(sess,path+'/'+filename)
                 
