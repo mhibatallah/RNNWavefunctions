@@ -87,6 +87,11 @@ def run_1DTFIM(numsteps = 10**4, systemsize = 20, num_units = 50, Bx = 1, num_la
 
     # System size
     N = systemsize
+    
+    Jz = +np.ones(N) #Ferromagnetic coupling
+
+    #Learning rate
+    lr=np.float64(learningrate)
 
     # Intitializing the RNN-----------
     units=[num_units]*num_layers #list containing the number of hidden units for each layer of the networks
@@ -132,11 +137,6 @@ def run_1DTFIM(numsteps = 10**4, systemsize = 20, num_units = 50, Bx = 1, num_la
     #Building the graph -------------------
 
     path=os.getcwd()
-
-    Jz = +np.ones(N) #Ferromagnetic coupling
-
-    #Learning rate
-    lr=np.float64(learningrate)
 
     ending='_units'
     for u in units:
