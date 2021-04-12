@@ -1,5 +1,3 @@
-Do No Harm License
-
 **Preamble**
 
 Most software today is developed with little to no thought of how it will be used, or the consequences for our society and planet.
@@ -12,7 +10,7 @@ We build software to further this vision of a just world, or at the very least, 
 
 **Terms**
 
-*Copyright* (c) *(2020)* *(Mohamed Hibat-Allah & contributors and Vector Institute)*. All rights reserved.
+*Copyright* (c) *(2020)* *(Mohamed Hibat-Allah, Contributors and Vector Institute)*. All rights reserved.
 Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
 
 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
@@ -21,45 +19,15 @@ Redistribution and use in source and binary forms, with or without modification,
 
 3. Neither the name of the copyright holder nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
 
-4. This software must not be used by any organisation, website, product or service that:
+4. The Software shall be used in a manner consistent with Human Rights Principles (https://www.un.org/en/universal-declaration-human-rights/).
 
-   a) lobbies for, promotes, or derives a majority of income from actions that support or contribute to:
-      * sex trafficking
-      * human trafficking
-      * slavery
-      * indentured servitude
-      * gambling
-      * tobacco
-      * adversely addictive behaviours
-      * nuclear energy
-      * warfare
-      * weapons manufacturing
-      * war crimes
-      * violence (except when required to protect public safety)
-      * burning of forests
-      * deforestation
-      * hate speech or discrimination based on age, gender, gender identity, race, sexuality, religion, nationality
-
-   b) lobbies against, or derives a majority of income from actions that discourage or frustrate:
-      * peace
-      * access to the rights set out in the Universal Declaration of Human Rights and the Convention on the Rights of the Child
-      * peaceful assembly and association (including worker associations)
-      * a safe environment or action to curtail the use of fossil fuels or prevent climate change
-      * democratic processes
-
-5. All redistribution of source code or binary form, including any modifications must be under these terms. You must inform recipients that the code is governed by these conditions, and how they can obtain a copy of this license. You may not attempt to alter the conditions of who may/may not use this software.
-
-We define:
-
-**Forests** to be 0.5 or more hectares of trees that were either planted more than 50 years ago or were not planted by humans or human made equipment.
-
-**Deforestation** to be the clearing, burning or destruction of 0.5 or more hectares of forests within a 1 year period.
+5. The Software shall not be used to frustrate efforts to curtail the use of fossil fuels or to discourage actions preventing climate change.
 
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 **Attribution**
 
-Do No Harm License [Contributor Covenant][homepage], (pre 1.0),
-available at https://github.com/raisely/NoHarm
+This license is derived from the BSD-3-Clause license.
 
-[homepage]: https://github.com/raisely/NoHarm
+This licence is inspired from the Do No Harm License (pre 1.0), available at https://github.com/raisely/NoHarm, and the Hippocratic License https://firstdonoharm.dev/version/2/1/license/
+
