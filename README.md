@@ -27,7 +27,7 @@ To learn more about this new approach, you can check out our paper on Physical R
 For further questions or inquiries, please feel free to send an email to mohamed.hibat.allah@uwaterloo.ca. Future contributions would be really appreciated.
 
 ## License
-The license of this work is derived from the BSD-3-Clause license. Ethical clauses are added to promote good uses of this code.
+The [license](https://github.com/mhibatallah/RNNWavefunctions/blob/master/LICENSE.md) of this work is derived from the BSD-3-Clause license. Ethical clauses are added to promote good uses of this code.
 
 ## Citing
 ```bibtex
