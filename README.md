@@ -29,7 +29,7 @@ For further questions or inquiries, please feel free to send an email to mohamed
 ## License
 The license of this work is derived from the BSD-3-Clause license. Ethical clauses are added to promote good uses of this code.
 
-## Citing:
+## Citing
 ```bibtex
 @article{PhysRevResearch.2.023358,
   title = {Recurrent neural network wave functions},
