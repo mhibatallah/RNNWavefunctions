@@ -68,9 +68,10 @@ def Ising_local_energies(Jz, Bx, samples, queue_samples, log_probs_tensor, sampl
     # print("Estimating log probs ended ", end-start)
 
     log_probs_reshaped = np.reshape(log_probs, [N+1,numsamples])
-    for j in range(numsamples):
-        local_energies[j] += -Bx*np.sum(np.exp(0.5*log_probs_reshaped[1:,j]-0.5*log_probs_reshaped[0,j]))
-
+    
+#     for j in range(numsamples):
+#         local_energies[j] += -Bx*np.sum(np.exp(0.5*log_probs_reshaped[1:,j]-0.5*log_probs_reshaped[0,j]))
+    local_energies += -Bx*np.sum(np.exp(0.5*log_probs_reshaped[1:,:]-0.5*log_probs_reshaped[0,:]), axis = 0) #This is faster than previous loop, since it runs in parallel
     return local_energies
 #--------------------------
 
