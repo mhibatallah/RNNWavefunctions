@@ -36,14 +36,21 @@ def J1J2MatrixElements(J1,J2,Bz,sigmap, sigmaH, matrixelements, periodic = False
     if periodic:
         limit = N
     else:
-        limit = N-1
+        limit = N-1    
+ 
+    if periodic:
+        limit2 = N
+    else:
+        limit2 = N-2     
 
     for site in range(limit):
         if sigmap[site]!=sigmap[(site+1)%N]: #if the two neighouring spins are opposite
             diag-=0.25*J1[site] #add a negative energy contribution
         else:
             diag+=0.25*J1[site]
-        if site<(limit-1) and J2[site] != 0.0:
+    
+    for site in range(limit2):
+        if J2[site] != 0.0:
             if sigmap[site]!=sigmap[(site+2)%N]: #if the two second neighouring spins are opposite
                 diag-=0.25*J2[site] #add a negative energy contribution
             else:
@@ -73,7 +80,7 @@ def J1J2MatrixElements(J1,J2,Bz,sigmap, sigmaH, matrixelements, periodic = False
 
               num += 1
 
-    for site in range(limit-1):
+    for site in range(limit2):
       if J2[site] != 0.0:
         if sigmap[site]!=sigmap[(site+2)%N]:
             sig=np.copy(sigmap)
