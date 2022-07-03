@@ -153,6 +153,7 @@ def run_1DTFIM(numsteps = 10**4, systemsize = 20, num_units = 50, Bx = 1, num_la
             log_probs_=wf.log_probability(samp,inputdim=2)
 
             #now calculate the fake cost function to enjoy the properties of automatic differentiation
+            # Eloc is not deferentiated since it is defined as a placeholder, so there is no need to use tf.stop_gradient
             cost = tf.reduce_mean(tf.multiply(log_probs_,Eloc)) - tf.reduce_mean(Eloc)*tf.reduce_mean(log_probs_)
 
             #Calculate Gradients---------------
