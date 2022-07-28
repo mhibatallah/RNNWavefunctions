@@ -2,7 +2,7 @@ In this folder, you will find an implementation of the two dimensional tensorize
 
 Our code supports multiples GPUs for speed up purposes and can also handle group symmetries on the square and the triangular lattices.
 
-If you would like to try the 2D Heisenberg on the square lattice for 4x4 system size, you can set `J2 = 0.0` and `L = 6` using the following:
+If you would like to try the 2D Heisenberg on the square lattice for 4x4 system size, you can set `J2 = 0.0` and `L = 4` using the following:
 
 ```
 python Run_RNNWF_2DHeis.py --J2 0.0 --L 4 
