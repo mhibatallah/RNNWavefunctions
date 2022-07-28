@@ -20,7 +20,7 @@ This repository contains the following folders:
 
 * **J1J2**: an implementation of the 1D Complex Recurrent Neural Network (cRNN) Wave Function to estimate the ground state of the 1D J1-J2 model, with a built-in U(1) symmetry to impose a zero magnetization as explained in the Appendix of our paper.
 
-* **2DHeisenberg**: an implementation of the 2D Complex Recurrent Neural Network Wave Function with tensorization for the purpose of finding the ground state of the 2D Heisenberg model both in the square and the triangular lattices.
+* **2DHeisenberg**: an implementation of the 2D Complex Recurrent Neural Network Wave Function with tensorization for the purpose of finding the ground state of the 2D Heisenberg model both in the square and the triangular lattices as described in our [NeurIPS 2021 paper](https://ml4physicalsciences.github.io/2021/files/NeurIPS_ML4PS_2021_92.pdf).
 
 * **Tutorials**: this folder contains jupyter notebooks that you can run on <a href="http://colab.research.google.com" target="_blank">Google Colaboratory</a> (with a free GPU!) to test pRNN wave functions on 1DTFIM and cRNN wave functions on 1D J1J2, and to compare with exact diagonalization for small system sizes. These notebooks will also help you to get a clearer idea on how to use the remaining code in the previous folders for further investigations.
 
