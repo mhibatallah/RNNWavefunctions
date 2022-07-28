@@ -42,7 +42,7 @@ python Run_RNNWF_2DHeis.py --J2 1.0 --L 4 --mag_fixed True --Sz 0 --T0 0.25 --Na
 
 `Nannealing`, `Nwarmup`, `Nconvergence` are hyperparameters described in [our manuscript](https://ml4physicalsciences.github.io/2021/files/NeurIPS_ML4PS_2021_92.pdf).
 
-Other hyperparameters can be explored in `Run_RNNWF_2DHeis.py'.
+Other hyperparameters can be explored in `Run_RNNWF_2DHeis.py`.
 
 We note that in this code we use the `tensordot2` operation from the [TensorNetwork package](https://github.com/google/TensorNetwork) to speed up tensorized operations.
 
