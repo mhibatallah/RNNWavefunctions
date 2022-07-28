@@ -26,7 +26,6 @@ parser.add_argument('--RNN_symmetry', type = str, default='c4vsym')
 parser.add_argument('--spinparity_fixed', type = str2bool, default=False)
 parser.add_argument('--spinparity_value', type = int, default=1)
 parser.add_argument('--group_character', type = str, default= 'A1')
-parser.add_argument('--checkpoint_dir', type = str, default= "/checkpoint/hibatallah")
 parser.add_argument('--gradient_clip', type = str2bool, default=False)
 parser.add_argument('--gradient_clipvalue', type = float, default=10.0)
 parser.add_argument('--normalized_gradients', type = str2bool, default=False)
@@ -119,7 +118,7 @@ tf.compat.v1.set_random_seed(seed)  # tensorflow pseudo-random generator
 
 #Path for checkpoints
 backgroundpath = './Check_Points/Size_'+str(Nx)+'x'+ str(Ny)
-filename_checkpoint = args.checkpoint_dir+'/RNNwavefunction_2DTCRNN_'+str(Nx)+'x'+ str(Ny)+ending+savename+'.ckpt'
+filename_checkpoint = './Check_Points/Size_'+str(Nx)+'x'+ str(Ny)+'/RNNwavefunction_2DTCRNN_'+str(Nx)+'x'+ str(Ny)+ending+savename+'.ckpt'
 
 #If desired to checkpoint from a previous system size
 backgroundpath_old = './Check_Points/Size_'+str(Nx-2)+'x'+ str(Ny-2)
