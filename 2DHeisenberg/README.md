@@ -1,4 +1,4 @@
-In this folder, you will find an implementation of the two dimensional tensorized RNN for the square and the triangular lattices with open boundary conditions. This code was used to produce the results of our NeurIPS 2021 paper: https://ml4physicalsciences.github.io/2021/files/NeurIPS_ML4PS_2021_92.pdf
+In this folder, you will find an implementation of the two dimensional tensorized RNNs applied to the 2D Heisenberg model on the square and the triangular lattices with open boundary conditions. This code was used to produce the results of our NeurIPS 2021 paper: https://ml4physicalsciences.github.io/2021/files/NeurIPS_ML4PS_2021_92.pdf
 
 Our code supports multiples GPUs for speed up purposes and can also handle group symmetries on the square and the triangular lattices.
 
