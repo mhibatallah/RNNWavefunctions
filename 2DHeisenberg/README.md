@@ -26,7 +26,7 @@ To be able to run the 2D Heisenberg on the square lattice with `C4v` symmetry, `
 python Run_RNNWF_2DHeis.py --J2 0.0 --L 4 --mag_fixed True --Sz 0 --RNN_symmetry c4vsym --group_character A1
 ```
 
-By default no symmetry is added on top of the RNN. We can also do the same on the triangular lattice with `C2d` symmetry:
+By default no symmetry is added on top of the RNN. You can also find other symmetry groups with their character in `MDComplexRNN.py`. We can also do the same on the triangular lattice with `C2d` symmetry:
 
 ```
 python Run_RNNWF_2DHeis.py --J2 0.0 --L 4 --mag_fixed True --Sz 0 --RNN_symmetry c2dsym --group_character A1
