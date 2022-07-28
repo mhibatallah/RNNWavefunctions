@@ -2,6 +2,8 @@ In this folder, you will find an implementation of the two dimensional tensorize
 
 Our code supports multiples GPUs for speed up purposes and can also handle group symmetries on the square and the triangular lattices.
 
+Our code has two RNN cells: `MDTensorizedcell` (without gating mechanism) and `MDTensorizedGRUcell`(with gating mechanism).
+
 If you would like to try the 2D Heisenberg on the square lattice for 4x4 system size, you can set `J2 = 0.0` and `L = 4` using the following:
 
 ```
