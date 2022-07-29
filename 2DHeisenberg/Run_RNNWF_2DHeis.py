@@ -22,7 +22,7 @@ parser.add_argument('--lrdecaytime_conv', type = float, default=2000)
 parser.add_argument('--mag_fixed', type = str2bool, default=True)
 parser.add_argument('--Sz', type = int, default=0)
 parser.add_argument('--seed', type = int, default=111)
-parser.add_argument('--RNN_symmetry', type = str, default='c4vsym')
+parser.add_argument('--RNN_symmetry', type = str, default='nosym')
 parser.add_argument('--spinparity_fixed', type = str2bool, default=False)
 parser.add_argument('--spinparity_value', type = int, default=1)
 parser.add_argument('--group_character', type = str, default= 'A1')
@@ -32,7 +32,7 @@ parser.add_argument('--normalized_gradients', type = str2bool, default=False)
 parser.add_argument('--dotraining', type = str2bool, default=True)
 parser.add_argument('--T0', type = float, default= 0.0)
 parser.add_argument('--Nwarmup', type = int, default=1000)
-parser.add_argument('--NannealingID', type = int, default=1)
+parser.add_argument('--Nannealing', type = int, default=1000)
 parser.add_argument('--Ntrain', type = int, default=5)
 parser.add_argument('--Nconvergence', type = int, default=0)
 parser.add_argument('--numsamples', type = int, default=100)
@@ -63,7 +63,7 @@ gradient_clipvalue = args.gradient_clipvalue
 normalized_gradients = args.normalized_gradients
 dotraining = args.dotraining
 Nwarmup = args.Nwarmup
-Nannealing = args.NannealingID
+Nannealing = args.Nannealing
 Ntrain = args.Ntrain
 Nconvergence = args.Nconvergence
 numsteps = Nwarmup + (Nannealing+1)*Ntrain + Nconvergence
@@ -199,12 +199,12 @@ with tf.compat.v1.variable_scope(wf.scope,reuse=tf.compat.v1.AUTO_REUSE):
         cost = 2*tf.math.real(tf.reduce_mean(input_tensor=tf.multiply(tf.math.conj(log_amps_tensor),tf.stop_gradient(Eloc))) - tf.reduce_mean(input_tensor=tf.math.conj(log_amps_tensor))*tf.reduce_mean(input_tensor=tf.stop_gradient(Eloc))) + 4*Temperature_placeholder*( tf.reduce_mean(tf.real(log_amps_tensor)*tf.stop_gradient(tf.real(log_amps_tensor))) - tf.reduce_mean(tf.real(log_amps_tensor))*tf.reduce_mean(tf.stop_gradient(tf.real(log_amps_tensor))) )
 
         if gradient_clip:
-            optimizer=tf.compat.v1.train.AdamOptimizer(learning_rate=learning_rate_placeholder)
+            optimizer=tf.compat.v1.train.AdamOptimizer(learning_rate=learningrate_placeholder)
             gradients, variables = zip(*optimizer.compute_gradients(cost))
             clipped_gradients = [tf.clip_by_value(g, -gradient_clipvalue, gradient_clipvalue) for g in gradients]
             optstep=optimizer.apply_gradients(zip(clipped_gradients,variables),global_step=global_step)
         elif normalized_gradients:
-            optimizer=tf.train.GradientDescentOptimizer(learning_rate=learning_rate_placeholder)
+            optimizer=tf.train.GradientDescentOptimizer(learning_rate=learningrate_placeholder)
             gradients, variables = zip(*optimizer.compute_gradients(cost))
             gradients_normalized = []
             for i in range(len(gradients)):
@@ -212,7 +212,7 @@ with tf.compat.v1.variable_scope(wf.scope,reuse=tf.compat.v1.AUTO_REUSE):
                 gradients_normalized.append(tf.sign(gradients[i])*random_numbers)
             optstep=optimizer.apply_gradients(zip(gradients_normalized,variables),global_step=global_step)
         else:
-            optimizer=tf.compat.v1.train.AdamOptimizer(learning_rate=learning_rate_placeholder)
+            optimizer=tf.compat.v1.train.AdamOptimizer(learning_rate=learningrate_placeholder)
             gradients, variables = zip(*optimizer.compute_gradients(cost))
             optstep=optimizer.apply_gradients(zip(gradients,variables),global_step=global_step)
 
