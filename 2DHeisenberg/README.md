@@ -22,7 +22,7 @@ If you would like to run the code for the 2D Heisenberg on the triangular lattic
 python Run_RNNWF_2DHeis.py --J2 1.0 --L 4
 ```
 
-To be able to run the 2D Heisenberg on the square lattice with `C4v` symmetry, `A1` group character (other group characters are also available), `U(1)` symmetry (zero magnetization), you can do:
+To be able to run the 2D Heisenberg on the square lattice with `C4v` symmetry, `A1` group character, `U(1)` symmetry (zero magnetization), you can do:
 
 ```
 python Run_RNNWF_2DHeis.py --J2 0.0 --L 4 --mag_fixed True --Sz 0 --RNN_symmetry c4vsym --group_character A1
