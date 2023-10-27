@@ -474,7 +474,7 @@ class RNNwavefunction(object):
             list_samples = [samples]
             list_samples.append(tf.reshape(tf.image.rot90(tf.reshape(samples, [-1,self.Nx, self.Ny, 1]),k=-2), [-1,self.Nx, self.Ny]))
             list_samples.append(tf.transpose(a=samples, perm = [0,2,1]))
-            list_samples.append(tf.transpose(a=list_samples[2], perm = [0,2,1]))
+            list_samples.append(tf.transpose(a=list_samples[1], perm = [0,2,1]))
 
             if group_character == "A1":
                 group_character_signs = [+1, +1, +1, +1]
@@ -494,7 +494,7 @@ class RNNwavefunction(object):
             list_samples = [samples]
             list_samples.append(tf.reshape(tf.image.rot90(tf.reshape(samples, [-1,self.Nx, self.Ny, 1]),k=-2), [-1,self.Nx, self.Ny]))
             list_samples.append(tf.transpose(a=samples, perm = [0,2,1]))
-            list_samples.append(tf.transpose(a=list_samples[2], perm = [0,2,1]))
+            list_samples.append(tf.transpose(a=list_samples[1], perm = [0,2,1]))
 
             list_samples.append(tf.abs(1-samples))
             list_samples.append(tf.reshape(tf.image.rot90(tf.reshape(tf.abs(1-samples), [-1,self.Nx, self.Ny, 1]),k=-2), [-1,self.Nx, self.Ny]))
