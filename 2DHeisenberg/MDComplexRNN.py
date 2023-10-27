@@ -497,7 +497,7 @@ class RNNwavefunction(object):
             list_samples.append(tf.transpose(a=list_samples[1], perm = [0,2,1]))
 
             list_samples.append(tf.abs(1-samples))
-            list_samples.append(tf.reshape(tf.image.rot90(tf.reshape(tf.abs(1-samples), [-1,self.Nx, self.Ny, 1]),k=-2), [-1,self.Nx, self.Ny]))
+            list_samples.append(tf.abs(1-list_samples[1]))
             list_samples.append(tf.abs(1-list_samples[2]))
             list_samples.append(tf.abs(1-list_samples[3]))
 
