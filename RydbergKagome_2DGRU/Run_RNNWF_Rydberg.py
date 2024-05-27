@@ -157,9 +157,7 @@ with tf.compat.v1.variable_scope(wf.scope,reuse=tf.compat.v1.AUTO_REUSE):
 
         Floc = Eloc + Temperature_placeholder*log_probs_forgrad
         cost = tf.reduce_mean(input_tensor=tf.multiply(log_probs_forgrad,tf.stop_gradient(Floc))) - tf.reduce_mean(input_tensor=log_probs_forgrad)*tf.reduce_mean(input_tensor=tf.stop_gradient(Floc))
-
-        # cost = tf.reduce_mean(input_tensor=tf.multiply(log_probs_forgrad,tf.stop_gradient(Eloc))) - tf.reduce_mean(input_tensor=log_probs_forgrad)*tf.reduce_mean(input_tensor=tf.stop_gradient(Eloc))
-
+        
         if gradient_clip:
             optimizer=tf.compat.v1.train.AdamOptimizer(learning_rate=learning_rate)
             gradients, variables = zip(*optimizer.compute_gradients(cost))
