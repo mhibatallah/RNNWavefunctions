@@ -22,6 +22,8 @@ This repository contains the following folders:
 
 * **2DHeisenberg**: an implementation of the 2D Complex Recurrent Neural Network Wave Function with tensorization for the purpose of finding the ground state of the 2D Heisenberg model both in the square and the triangular lattices as described in our [NeurIPS 2021 paper](https://ml4physicalsciences.github.io/2021/files/NeurIPS_ML4PS_2021_92.pdf).
 
+* **RydbergKagome**: an implementation of the 2D positive Recurrent Neural Network Wave Function with the gating mechanism, periodic boundary conditions, and annealing to study the ground state of the Rydberg atoms arrays on Kagome lattice.
+
 * **Tutorials**: this folder contains jupyter notebooks that you can run on <a href="http://colab.research.google.com" target="_blank">Google Colaboratory</a> (with a free GPU!) to test pRNN wave functions on 1DTFIM and cRNN wave functions on 1D J1J2, and to compare with exact diagonalization for small system sizes. These notebooks will also help you to get a clearer idea on how to use the remaining code in the previous folders for further investigations.
 
 * **Check_Points**: this folder is intended to contain the saved parameters of the RNN wave function as well as the energies and the variances after training.
