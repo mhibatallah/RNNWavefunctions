@@ -4,6 +4,8 @@ RNN wave functions are efficient quantum many-body wave function ansätzes based
 
 In our [NeurIPS 2021 paper](https://ml4physicalsciences.github.io/2021/files/NeurIPS_ML4PS_2021_92.pdf), we also show that we can construct a tensorized version of two dimensional RNN wave functions that are capable of competing with state-of-the-art methods on the 2D Heisenberg model both on the square and the triangular lattices.
 
+In our [arXiv paper](https://arxiv.org/pdf/2405.20384), we demonstrate the promising potential of two-dimensional RNNs in the study of Rydberg atoms arrays on the Kagome lattice.
+
 This code is an adaptation of [Martin Ganahl's code](https://github.com/mganahl/Recurrent_NN_VMC). We optimized the code, fixed some bugs, added the parity symmetry implementation, the complex RNN with U(1)-symmetry implementation along with the 2D RNN implementation.
 
 ## Dependencies
@@ -22,7 +24,7 @@ This repository contains the following folders:
 
 * **2DHeisenberg**: an implementation of the 2D Complex Recurrent Neural Network Wave Function with tensorization for the purpose of finding the ground state of the 2D Heisenberg model both in the square and the triangular lattices as described in our [NeurIPS 2021 paper](https://ml4physicalsciences.github.io/2021/files/NeurIPS_ML4PS_2021_92.pdf).
 
-* **RydbergKagome_2DGRU**: an implementation of the 2D positive Recurrent Neural Network Wave Function with the gating mechanism, periodic boundary conditions, and annealing to study the ground state of the Rydberg atoms arrays on Kagome lattice.
+* **RydbergKagome_2DGRU**: an implementation of the 2D positive Recurrent Neural Network Wave Function with the gating mechanism, periodic boundary conditions, and annealing to study the ground state of the Rydberg atoms arrays on Kagome lattice. More details are provided in [our paper](https://arxiv.org/pdf/2405.20384).
 
 * **Tutorials**: this folder contains jupyter notebooks that you can run on <a href="http://colab.research.google.com" target="_blank">Google Colaboratory</a> (with a free GPU!) to test pRNN wave functions on 1DTFIM and cRNN wave functions on 1D J1J2, and to compare with exact diagonalization for small system sizes. These notebooks will also help you to get a clearer idea on how to use the remaining code in the previous folders for further investigations.
 
