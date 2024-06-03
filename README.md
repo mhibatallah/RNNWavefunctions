@@ -4,7 +4,7 @@ RNN wave functions are efficient quantum many-body wave function ansätzes based
 
 In our [NeurIPS 2021 paper](https://ml4physicalsciences.github.io/2021/files/NeurIPS_ML4PS_2021_92.pdf), we also show that we can construct a tensorized version of two dimensional RNN wave functions that are capable of competing with state-of-the-art methods on the 2D Heisenberg model both on the square and the triangular lattices.
 
-In our [arXiv paper](https://arxiv.org/pdf/2405.20384), we demonstrate the promising potential of two-dimensional RNNs in the study of Rydberg atoms arrays on the Kagome lattice.
+In [another paper](https://arxiv.org/pdf/2405.20384), we demonstrate the promising potential of two-dimensional RNNs in the study of Rydberg atoms arrays on the Kagome lattice.
 
 This code is an adaptation of [Martin Ganahl's code](https://github.com/mganahl/Recurrent_NN_VMC). We optimized the code, fixed some bugs, added the parity symmetry implementation, the complex RNN with U(1)-symmetry implementation along with the 2D RNN implementation.
 
